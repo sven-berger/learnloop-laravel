@@ -23,6 +23,11 @@ fi
 echo "[$(date)] Installing npm packages..." >> storage/logs/deploy.log
 /usr/bin/npm ci --include=dev >> storage/logs/deploy.log 2>&1
 
+# Ensure production asset mode (never use stale Vite dev server marker)
+echo "[$(date)] Cleaning old frontend artifacts..." >> storage/logs/deploy.log
+rm -f public/hot
+rm -rf public/build
+
 # Always build - this is critical for CSS/JS updates
 echo "[$(date)] Building assets..." >> storage/logs/deploy.log
 /usr/bin/npx vite build >> storage/logs/deploy.log 2>&1
