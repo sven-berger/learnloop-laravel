@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -e
+
+cd /var/www/laravel.riftcore.de
+
+export HOME=/var/www/laravel.riftcore.de
+export GIT_SSH_COMMAND="ssh -i /var/www/laravel.riftcore.de/.ssh/github_deploy -o IdentitiesOnly=yes -o UserKnownHostsFile=/var/www/laravel.riftcore.de/.ssh/known_hosts"
+
+echo "[$(date)] ========= DEPLOYING =========" >> storage/logs/deploy.log
+
+# Git
+git fetch origin
+git reset --hard origin/main
+COMMIT=$(git rev-parse --short HEAD)
+echo "[$(date)] Pulled commit: $COMMIT" >> storage/logs/deploy.log
+
+# PHP dependencies
+if [ -f composer.json ]; then
+    composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
+fi
+
+# npm dependencies
+if [ ! -d node_modules ] || [ ! -f package-lock.json ]; then
+    echo "[$(date)] Installing npm packages..." >> storage/logs/deploy.log
+    /usr/bin/npm ci --include=dev 2>&1 | tail -5 >> storage/logs/deploy.log
+fi
+
+# Always build - this is critical for CSS/JS updates
+echo "[$(date)] Building assets..." >> storage/logs/deploy.log
+/usr/bin/npm run build >> storage/logs/deploy.log 2>&1
+echo "[$(date)] Assets built successfully" >> storage/logs/deploy.log
+
+# Clear caches
+php artisan config:clear
+php artisan cache:clear
+
+echo "[$(date)] ========= DEPLOYMENT OK =========" >> storage/logs/deploy.log
