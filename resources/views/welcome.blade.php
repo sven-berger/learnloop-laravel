@@ -11,7 +11,7 @@
     <div
         class="bg-orange-600 p-12 rounded-3xl shadow-2xl max-w-md w-full mx-4 text-center transform hover:scale-105 transition-all duration-300">
         <h1 class="text-4xl font-bold text-gray-200 mb-6">Tailwind + Laravel</h1>
-        <p class="text-lg text-gray-200 mb-8">Laravel + Tailwind lokal & auf Server!</p>
+        <p class="text-lg text-gray-200 mb-8">Laravel + Tailwind 12 lokal & auf Server!</p>
         <p class="text-md text-gray-200 mb-6">Deploy via GitHub Webhook aktiv.</p>
     </div>
 </body>
