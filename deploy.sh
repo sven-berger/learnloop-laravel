@@ -19,11 +19,9 @@ if [ -f composer.json ]; then
     composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader
 fi
 
-# npm dependencies
-if [ ! -d node_modules ] || [ ! -f package-lock.json ]; then
-    echo "[$(date)] Installing npm packages..." >> storage/logs/deploy.log
-    /usr/bin/npm ci --include=dev 2>&1 | tail -5 >> storage/logs/deploy.log
-fi
+# npm dependencies - always install to ensure packages are up-to-date
+echo "[$(date)] Installing npm packages..." >> storage/logs/deploy.log
+/usr/bin/npm ci --include=dev >> storage/logs/deploy.log 2>&1
 
 # Always build - this is critical for CSS/JS updates
 echo "[$(date)] Building assets..." >> storage/logs/deploy.log
