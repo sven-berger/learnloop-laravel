@@ -30,7 +30,7 @@ rm -rf public/build
 
 # Always build - this is critical for CSS/JS updates
 echo "[$(date)] Building assets..." >> storage/logs/deploy.log
-/usr/bin/npx vite build >> storage/logs/deploy.log 2>&1
+/usr/bin/npm run build >> storage/logs/deploy.log 2>&1
 echo "[$(date)] Assets built successfully" >> storage/logs/deploy.log
 
 # Clear caches
