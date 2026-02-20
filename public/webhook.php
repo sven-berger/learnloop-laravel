@@ -21,7 +21,8 @@ pclose(popen($cmd, "r"));
 file_put_contents($log, "CMD_LAUNCHED\n", FILE_APPEND);
 
 // Build assets (runs as www-data via PHP, handles permission issues)
-exec("php /var/www/laravel.riftcore.de/public/deploy-build.php > /dev/null 2>&1 &");
+$buildCmd = "nohup php /var/www/laravel.riftcore.de/public/deploy-build.php >> /var/www/laravel.riftcore.de/storage/logs/deploy.log 2>&1 &";
+pclose(popen($buildCmd, "r"));
 file_put_contents($log, "BUILD_LAUNCHED\n", FILE_APPEND);
 
 if (function_exists("fastcgi_finish_request")) {
