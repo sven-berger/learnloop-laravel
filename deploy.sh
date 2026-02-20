@@ -25,7 +25,7 @@ echo "[$(date)] Installing npm packages..." >> storage/logs/deploy.log
 
 # Always build - this is critical for CSS/JS updates
 echo "[$(date)] Building assets..." >> storage/logs/deploy.log
-/usr/bin/npm run build >> storage/logs/deploy.log 2>&1
+/usr/bin/npx vite build >> storage/logs/deploy.log 2>&1
 echo "[$(date)] Assets built successfully" >> storage/logs/deploy.log
 
 # Clear caches
