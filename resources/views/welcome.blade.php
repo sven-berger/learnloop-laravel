@@ -6,7 +6,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-purple-500 min-h-screen flex items-center justify-center">
+<body class="bg-red-500 min-h-screen flex items-center justify-center">
     <div
         class="bg-orange-600 p-12 rounded-3xl shadow-2xl max-w-md w-full mx-4 text-center transform hover:scale-105 transition-all duration-300">
         <h1 class="text-4xl font-bold text-gray-200 mb-6">Tailwind Test</h1>
