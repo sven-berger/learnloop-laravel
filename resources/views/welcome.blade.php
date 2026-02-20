@@ -3,7 +3,7 @@
 
 <head>
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-linear-to-r from-blue-500 to-purple-600 min-h-screen flex items-center justify-center">
