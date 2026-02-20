@@ -15,12 +15,14 @@ if (!hash_equals($signature, $header)) {
 
 file_put_contents($log, "SIG_OK\n", FILE_APPEND);
 
-// Deploy script plus npm build to ensure CSS is always updated
-$cmd = "nohup bash -c 'cd /var/www/laravel.riftcore.de && " .
-       "/var/www/laravel.riftcore.de/deploy.sh && " .
-       "npm run build' > /var/www/laravel.riftcore.de/storage/logs/deploy.log 2>&1 &";
+// Deploy: Git + dependencies
+$cmd = "nohup /var/www/laravel.riftcore.de/deploy.sh > /var/www/laravel.riftcore.de/storage/logs/deploy.log 2>&1 &";
 pclose(popen($cmd, "r"));
 file_put_contents($log, "CMD_LAUNCHED\n", FILE_APPEND);
+
+// Build assets (runs as www-data via PHP, handles permission issues)
+exec("php /var/www/laravel.riftcore.de/public/deploy-build.php > /dev/null 2>&1 &");
+file_put_contents($log, "BUILD_LAUNCHED\n", FILE_APPEND);
 
 if (function_exists("fastcgi_finish_request")) {
     fastcgi_finish_request();
