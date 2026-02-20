@@ -35,7 +35,7 @@ if (file_exists("$dir/node_modules")) {
 file_put_contents($log, "[" . date('Y-m-d H:i:s') . "] Running npm install...\n", FILE_APPEND);
 $output = [];
 $return = 0;
-exec("npm ci --include=dev 2>&1", $output, $return);
+exec("/usr/bin/npm ci --include=dev 2>&1", $output, $return);
 file_put_contents($log, implode("\n", $output) . "\n", FILE_APPEND);
 
 if ($return === 0) {
@@ -44,11 +44,13 @@ if ($return === 0) {
     file_put_contents($log, "[" . date('Y-m-d H:i:s') . "] npm install FAILED with code $return\n", FILE_APPEND);
 }
 
-// Run npm build
+// Run npm build - use npx to ensure npm is available
 file_put_contents($log, "[" . date('Y-m-d H:i:s') . "] Running npm build...\n", FILE_APPEND);
 $output = [];
 $return = 0;
-exec("npm run build 2>&1", $output, $return);
+// Use npx which doesn't require global npm, or use full paths
+$buildCmd = "cd $dir && /usr/bin/npm run build 2>&1";
+exec($buildCmd, $output, $return);
 file_put_contents($log, implode("\n", $output) . "\n", FILE_APPEND);
 
 if ($return === 0) {
