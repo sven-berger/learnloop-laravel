@@ -18,7 +18,7 @@
     </div>
 
     <div class="bg-yellow-100 mb-20 p-5 border-2 border-yellow-400 rounded-lg mt-10 max-w-md w-full mx-4 text-center">
-        <p class="text-yellow-800 font-semibold">⚠️ Hinweis: Bitte Cache leeren, wenn Änderungen nicht sichtbar sind.</p>   
+        <p class="text-black font-semibold">⚠️ Hinweis: Bitte Cache leeren, wenn Änderungen nicht sichtbar sind.</p>   
     </div>
 </body>
 
