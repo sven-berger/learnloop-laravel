@@ -43,5 +43,6 @@ echo "[$(date)] Assets built successfully" >> storage/logs/deploy.log
 # Clear caches
 php artisan config:clear
 php artisan cache:clear
+php artisan view:clear
 
 echo "[$(date)] ========= DEPLOYMENT OK =========" >> storage/logs/deploy.log
