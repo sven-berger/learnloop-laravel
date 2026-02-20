@@ -7,6 +7,16 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Daily Workflow
+
+1. Aenderungen vornehmen
+2. `git status`
+3. `git add <files>`
+4. `git commit -m "Nachricht"`
+5. `git push origin main` (triggert Webhook-Deploy)
+6. Ergebnis pruefen: `https://laravel.riftcore.de/`
+7. Optional: Deploy-Log ansehen: `ssh sven@116.202.66.41 'tail -n 50 /var/www/laravel.riftcore.de/storage/logs/deploy.log'`
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
