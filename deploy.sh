@@ -6,6 +6,14 @@ cd /var/www/laravel.riftcore.de
 export HOME=/var/www/laravel.riftcore.de
 export GIT_SSH_COMMAND="ssh -i /var/www/laravel.riftcore.de/.ssh/github_deploy -o IdentitiesOnly=yes -o UserKnownHostsFile=/var/www/laravel.riftcore.de/.ssh/known_hosts"
 
+# Prevent concurrent deploys (webhook retries / multiple pushes)
+LOCK_FILE="/tmp/learnloop-deploy.lock"
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+    echo "[$(date)] ========= DEPLOY SKIPPED (lock busy) =========" >> storage/logs/deploy.log
+    exit 0
+fi
+
 echo "[$(date)] ========= DEPLOYING =========" >> storage/logs/deploy.log
 
 # Git
