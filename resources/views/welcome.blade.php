@@ -16,6 +16,10 @@
             <p class="text-green-800 font-semibold">✅ Erfolg: Tailwind-Klassen wirken!</p>
         </div>
     </div>
+
+    <div class="bg-yellow-100 mb-20">
+        <p class="text-yellow-800 font-semibold">⚠️ Hinweis: Bitte Cache leeren, wenn Änderungen nicht sichtbar sind.</p>   
+    </div>
 </body>
 
 </html>
