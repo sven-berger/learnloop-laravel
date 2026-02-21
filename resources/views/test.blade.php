@@ -8,18 +8,12 @@
 @endphp
 
 <div>
-    <div class="mb-6">
-        <p class="text-xs font-semibold uppercase tracking-wider text-gray-500">Rechen-Test</p>
-        <h2 class="mt-2 text-2xl font-bold text-gray-900">Dein Multi-Faktor</h2>
-        <p class="mt-1 text-sm text-gray-600">Gib Name und Zahlen ein, wir rechnen sofort.</p>
-    </div>
-
     <form method="POST" class="grid gap-5">
         @csrf
         <div>
             <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
             <input
-                class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"
+                class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
                 id="name"
                 name="name"
                 value="{{ old('name', $name) }}"
@@ -34,7 +28,7 @@
                 type="number"
                 id="randomNumber"
                 name="randomNumber"
-                class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"
+                class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
                 min="1"
                 max="10"
                 value="{{ old('randomNumber', $randomNumber) }}"
@@ -46,7 +40,7 @@
         <div data-controller="form-own-input">
             <label class="block text-sm font-medium text-gray-700" for="selectMulti">Multi-Faktor</label>
             <select
-                class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"
+                class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
                 id="selectMulti"
                 name="selectMulti"
                 data-form-own-input-target="select"
@@ -67,7 +61,7 @@
 
         <button
             type="submit"
-            class="inline-flex items-center justify-center rounded-lg p-4 bg-linear-to-r from-red-600 via-rose-600 to-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:-translate-y-0.5 hover:shadow-red-500/30"
+            class="bg-blue-500 text-white rounded-full p-4"
         >
             Absenden
         </button>
@@ -75,31 +69,17 @@
 </div>
 
 @if ($finalNumber !== null)
-    <div class="rounded-2xl border border-emerald-100 bg-linear-to-br from-emerald-50 via-white to-slate-50 p-6 shadow-lg">
-        <div class="flex items-center justify-between gap-4">
-            <div>
-                <p class="text-xs font-semibold uppercase tracking-wider text-emerald-600">Ergebnis</p>
-                <h2 class="mt-2 text-lg font-semibold text-gray-900">Hallo {{ $name ?: '...' }}, wie geht es dir?</h2>
-            </div>
-            <div class="flex h-11 w-11 items-center justify-center rounded-full bg-emerald-600 text-white shadow-md shadow-emerald-200">
-                <span class="text-lg font-bold">=</span>
-            </div>
-        </div>
+    <div class="bg-white w-full p-6 border border-gray-200 rounded-2xl mt-10">
+        <h3 class="lg:text-2xl text-xl relative inline-block text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-emerald-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.75 after:bg-linear-to-r after:from-sky-400 after:to-emerald-600 pb-2 mb-5">
+            Ergebnis
+        </h3>
 
-        <div class="mt-5 flex flex-wrap items-center gap-3 text-gray-700">
-            <span class="rounded-full bg-white px-3 py-1 text-sm font-semibold text-red-600 shadow-sm">
-                {{ $randomNumber }}
-                <span class="ml-1 text-[11px] font-normal text-gray-400">Deine Zahl</span>
-            </span>
-            <span class="text-sm font-semibold text-gray-500">x</span>
-            <span class="rounded-full bg-white px-3 py-1 text-sm font-semibold text-red-600 shadow-sm">
-                {{ $selectMulti }}
-                <span class="ml-1 text-[11px] font-normal text-gray-400">Multi-Faktor</span>
-            </span>
-            <span class="text-sm font-semibold text-gray-500">=</span>
-            <span class="rounded-full bg-emerald-600 px-3 py-1 text-sm font-semibold text-white shadow-sm">
-                {{ $finalNumber }}
-            </span>
+        <p class="text-gray-500 mb-5">Hallo {{ $name ?: '...' }}, wie geht es dir?</p>
+
+        <div class="grid gap-2 text-gray-600">
+            <p>Deine Zahl: <span class="font-medium">{{ $randomNumber }}</span></p>
+            <p>Multi-Faktor: <span class="font-medium">{{ $selectMulti }}</span></p>
+            <p>Ergebnis: <span class="font-medium">{{ $finalNumber }}</span></p>
         </div>
     </div>
 @endif

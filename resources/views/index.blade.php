@@ -4,26 +4,26 @@
 @section('content')
 <form method="POST" class="grid gap-4">
         @csrf
-    <input name="email" placeholder="E-Mail" class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"
- />
-    <textarea name="message" placeholder="Nachricht" class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"></textarea>
-    <button type="submit" class="inline-flex items-center justify-center rounded-lg p-4 bg-linear-to-r from-red-600 via-rose-600 to-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/20 transition hover:-translate-y-0.5 hover:shadow-red-500/30 ">Senden</button>
+  <input name="email" placeholder="E-Mail" class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3" />
+  <textarea name="message" placeholder="Nachricht" class="bg-white w-full p-4 border border-gray-200 rounded-2xl pt-6 pl-6 mt-3"></textarea>
+  <button type="submit" class="bg-blue-500 text-white rounded-full p-4">Senden</button>
 </form>
 
-
-<h2 class="mt-10 mb-5 text-yellow-800 text-2xl font-bold">Hallo Stimulus!</h2>
+<h3 class="lg:text-2xl text-xl relative inline-block text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-emerald-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.75 after:bg-linear-to-r after:from-sky-400 after:to-emerald-600 pb-2 mt-10 mb-5">
+  Hallo Stimulus!
+</h3>
 <div data-controller="hello">
   <input
     data-hello-target="name"
     data-action="input->hello#sync"
     type="text"
-    class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"
+    class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
     placeholder="Gib deinen Namen ein"
   />
 
   <button
     data-action="click->hello#greet"
-    class="mt-5 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-2xl"
+    class="bg-blue-500 text-white rounded-full p-4 mt-5"
   >
     Begrüßung!
   </button>

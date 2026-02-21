@@ -8,32 +8,35 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-
-
-
-
-<body class="bg-[radial-gradient(1200px_circle_at_15%_20%,rgba(255,0,229,.85)_0%,transparent_55%),radial-gradient(900px_circle_at_85%_30%,rgba(0,245,255,.75)_0%,transparent_60%),radial-gradient(800px_circle_at_50%_90%,rgba(168,255,0,.65)_0%,transparent_55%),linear-gradient(135deg,#0b1020_0%,#080a12_100%)]">
-    <div class="min-h-screen flex flex-col">
-
-        <!-- Header -->
-        <header class="bg-gray-800 text-white p-4">
-            <h1 class="text-xl font-semibold">LearnLoop Formular</h1>
+<body>
+    <div class="min-h-screen flex flex-col p-4">
+        <header class="bg-red-800 rounded-2xl flex p-6">
+            <h2 class="text-3xl text-white">
+                <a href="{{ route('index') }}">RiftCore.de</a>
+            </h2>
         </header>
 
-        <!-- Main Layout -->
-        <div class="flex flex-1">
-
-            <aside class="w-1/5 pt-5 px-4">
-                @include('layouts.sidebar.Navigation')
-                @include('layouts.sidebar.Exercises')
+        <main class="flex flex-1 gap-8 max-sm:flex-col">
+            <aside class="order-2 md:order-1 lg:w-110">
+                <div class="min-h-full flex-1">
+                    @include('layouts.sidebar.Navigation')
+                    @include('layouts.sidebar.Templates')
+                    @include('layouts.sidebar.Exercises')
+                    @include('layouts.sidebar.ThatsMe')
+                    @include('layouts.sidebar.Counter')
+                </div>
             </aside>
 
-            <main class="flex-1 p-8 bg-white m-5">
-                <h2 class="text-2xl text-green-700 font-bold mb-6">@yield('title')</h2>
-                @yield('content')
-            </main>
-        </div>
+            <section class="order-1 md:order-2 flex-1">
+                <div class="flex-7 rounded-2xl border border-gray-300 bg-slate-200 p-8 my-5">
+                    <h2 class="lg:text-2xl text-xl relative inline-block text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-emerald-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.75 after:bg-linear-to-r after:from-sky-400 after:to-emerald-600 pb-2 mb-8">
+                        @yield('title')
+                    </h2>
+
+                    @yield('content')
+                </div>
+            </section>
+        </main>
     </div>
 </body>
-
 </html>

@@ -2,7 +2,7 @@
 @section('title', 'Gästebuch')
 
 @section('content')
-<div class="text-xl">
+<p class="text-gray-600 leading-relaxed">
     Hallo und willkommen zum Gästebuch!
-</div>
+</p>
 @endsection
