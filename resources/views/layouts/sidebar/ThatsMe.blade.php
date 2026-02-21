@@ -5,7 +5,7 @@
 
 <x-box>
     <x-h2 title="Das bin ich" class="mb-8"></x-h2>
-    <x-myprofile name="Sven" age="{{ $age }}" location="Limburger Straße 30 • 65510 Idstein"
+    <x-myprofile name="Sven Oliver Berger" age="{{ $age }}" location="Limburger Straße 30 • 65510 Idstein"
         email="bergersvenoliver@gmail.com" phone="+49 1511 9409788" about="Mein Traumberuf liegt in der Webentwicklung, PHP und
         JavaScript (HTML und CSS selbstredend)<br /><br />
     Die Kombination aus Laravel (PHP), Stimulus (JavaScript) und Tailwind CSS (CSS) ist für mich die perfekte Mischung,
