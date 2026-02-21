@@ -3,5 +3,7 @@
     <div class="space-y-4">
         <a href="{{ route('test') }}"
             class="block text-gray-700 hover:text-green-700 transition font-medium">Testseite</a>   
+            <a href="{{ route('hello') }}"
+            class="block text-gray-700 hover:text-green-700 transition font-medium">Hello Stimulus</a>
     </div>
 </div>

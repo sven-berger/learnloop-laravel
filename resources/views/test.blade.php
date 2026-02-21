@@ -43,12 +43,14 @@
             />
         </div>
 
-        <div>
+        <div data-controller="form-own-input">
             <label class="block text-sm font-medium text-gray-700" for="selectMulti">Multi-Faktor</label>
             <select
                 class="p-4 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition focus:border-green-500 focus:ring-4 focus:ring-green-100"
                 id="selectMulti"
                 name="selectMulti"
+                data-form-own-input-target="select"
+                data-action="change->form-own-input#sync"
                 required
             >
                 <option value="">Bitte wahlen:</option>
@@ -60,6 +62,7 @@
                 <option value="ownLetter" {{ $selectValue === 'ownLetter' ? 'selected' : '' }}>Eigene Zahl</option>
             </select>
             <p class="mt-2 text-xs text-gray-500">Wenn du "Eigene Zahl" wahlst, erscheint das Feld darunter.</p>
+            <div data-form-own-input-target="slot"></div>
         </div>
 
         <button
