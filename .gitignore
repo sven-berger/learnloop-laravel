@@ -17,3 +17,5 @@ bootstrap/cache/*.php
 .env.example
 
 .DS_Store
+.vscode/
+.idea/
