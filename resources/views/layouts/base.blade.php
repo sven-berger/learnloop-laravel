@@ -10,12 +10,7 @@
 
 <body>
     <div class="min-h-screen flex flex-col p-4">
-        <header class="bg-red-800 rounded-2xl flex p-6">
-            <h2 class="text-3xl text-white">
-                <a href="{{ route('index') }}">RiftCore.de</a>
-            </h2>
-        </header>
-
+        @include('layouts.header')
         <main class="flex flex-1 gap-8 max-sm:flex-col">
             <aside class="order-2 md:order-1 lg:w-110">
                 <div class="min-h-full flex-1">
@@ -35,4 +30,5 @@
         </main>
     </div>
 </body>
+
 </html>
