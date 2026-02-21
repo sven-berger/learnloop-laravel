@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\IndexController::class, 'indexAction'])->name('index');
-Route::get('/guestbook', [\App\Http\Controllers\GuestbookController::class, 'guestbookAction'])->name('guestbook');
+
+Route::get('/guestbook/', [\App\Http\Controllers\GuestbookController::class, 'guestbookAction'])->name('guestbook');
+Route::post('/guestbook/', [\App\Http\Controllers\GuestbookController::class, 'saveAction'])->name('guestbook.save');
+
 Route::match(['get', 'post'], '/test', [\App\Http\Controllers\TestController::class, 'testAction'])->name('test');
 Route::get('/hello', [\App\Http\Controllers\HelloController::class, 'hello'])->name('hello');
