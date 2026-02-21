@@ -24,6 +24,11 @@
 
             <section class="order-1 md:order-2 flex-1">
                 <div class="flex-7">
+                    <x-content class="flex justify-center">
+                        <h2
+                            class="text-4xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
+                            @yield('title')</h2>
+                    </x-content>
                     @yield('content')
                 </div>
             </section>

@@ -6,12 +6,9 @@ import "@ckeditor/ckeditor5-build-classic/build/translations/de.js";
 
 const application = Application.start();
 
-const controllerModules = import.meta.glob(
-  "./controllers/**/*_controller.{js,ts}",
-  {
-    eager: true,
-  },
-);
+const controllerModules = import.meta.glob("./controllers/**/*_controller.js", {
+  eager: true,
+});
 
 for (const path in controllerModules) {
   const controllerModule = controllerModules[path];
@@ -20,7 +17,7 @@ for (const path in controllerModules) {
 
   const identifier = path
     .replace("./controllers/", "")
-    .replace(/_controller\.(js|ts)$/, "")
+    .replace(/_controller\.js$/, "")
     .replace(/\//g, "--")
     .replace(/_/g, "-");
 

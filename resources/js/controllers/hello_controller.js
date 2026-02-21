@@ -1,13 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = [ "name", "output" ]
-
-  declare readonly nameTarget: HTMLInputElement;
-  declare readonly outputTarget: HTMLElement;
-  
-  declare readonly hasNameTarget: boolean;
-  declare readonly hasOutputTarget: boolean;
+  static targets = ["name", "output"];
 
   connect() {
     this.sync();
@@ -19,7 +13,6 @@ export default class extends Controller {
     const name = this.nameTarget.value.trim();
     const shouldShow = name.length > 0;
     this.outputTarget.classList.toggle("hidden", !shouldShow);
-
 
     if (!shouldShow) {
       this.outputTarget.textContent = "";
@@ -36,7 +29,13 @@ export default class extends Controller {
     }
 
     this.outputTarget.textContent = `Hallo, ${name}, wie geht es dir?`;
-    this.outputTarget.classList.add("mt-5", "bg-amber-300", "p-4", "border", "rounded-2xl");
+    this.outputTarget.classList.add(
+      "mt-5",
+      "bg-amber-300",
+      "p-4",
+      "border",
+      "rounded-2xl",
+    );
     this.outputTarget.classList.remove("hidden");
   }
 }
