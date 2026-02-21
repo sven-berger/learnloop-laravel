@@ -40,9 +40,21 @@ echo "[$(date)] Building assets..." >> storage/logs/deploy.log
 ./node_modules/.bin/vite build >> storage/logs/deploy.log 2>&1
 echo "[$(date)] Assets built successfully" >> storage/logs/deploy.log
 
-# Clear caches
+# Clear all caches (wichtig nach .env, Routes, Views Änderungen)
+echo "[$(date)] Clearing caches..." >> storage/logs/deploy.log
 php artisan config:clear
 php artisan cache:clear
 php artisan view:clear
+php artisan route:clear
+
+# Run migrations (nur neue werden ausgeführt)
+echo "[$(date)] Running migrations..." >> storage/logs/deploy.log
+php artisan migrate --force >> storage/logs/deploy.log 2>&1
+
+# Rebuild caches für Production Performance
+echo "[$(date)] Rebuilding optimized caches..." >> storage/logs/deploy.log
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
 
 echo "[$(date)] ========= DEPLOYMENT OK =========" >> storage/logs/deploy.log
