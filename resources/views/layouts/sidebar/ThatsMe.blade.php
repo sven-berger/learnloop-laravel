@@ -35,17 +35,17 @@
             <dt class="text-gray-500">Status:</dt>
             <dd class="font-medium text-gray-500">Praktikant</dd>
         </dl>
-
+        <!-- 
         <hr class="border-slate-400 my-5" />
 
         <dl class="block grid-cols-[auto_1fr] gap-x-6 gap-y-2 mb-3">
             <dt class="text-gray-500 mb-5">Über mich:</dt>
             <dd class="font-medium text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
                 alias mollitia nemo soluta, libero tempore veritatis numquam aliquam officiis? Doloribus.</dd>
-        </dl>
+        </dl> -->
     </div>
 
-    <div class="lg:mb-5 lg:w-96 lg:h-96 md:w-48 h-48 bg-gray-100 lg:flex lg:items-center lg:justify-center rounded-xl">
+    <!-- <div class="lg:mb-5 lg:w-96 lg:h-96 md:w-48 h-48 bg-gray-100 lg:flex lg:items-center lg:justify-center rounded-xl">
         <img src="/images/sidebarImage1.jpg" alt=""
             class="w-full h-full object-cover object-top rounded-xl transition-transform duration-300 hover:scale-105 my-10" />
     </div>
@@ -58,6 +58,6 @@
     <div class="lg:mb-5 lg:w-96 lg:h-96 md:w-48 h-48 bg-gray-100 lg:flex lg:items-center lg:justify-center rounded-xl">
         <img src="/images/sidebarImage3.png" alt=""
             class="w-full h-full object-cover object-top rounded-xl transition-transform duration-300 hover:scale-105 my-10" />
-    </div>
+    </div> -->
 
 </x-box>
