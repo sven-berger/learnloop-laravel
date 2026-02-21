@@ -1,9 +1,21 @@
-<x-box>
+<x-box data-controller="sidebar-counter">
     <x-h2 title="Counter"></x-h2>
 
-    <div class="bg-white rounded-2xl border-gray-200 flex items-center justify-center text-center mb-10 text-gray-600 p-4">0</div>
+    <div class="text-xl font-bold text-gray-800 bg-white rounded-2xl border p-4 border-gray-200 text-center mb-6"
+        data-sidebar-counter-target="output">0</div>
 
-    <button type="button" class="bg-green-600 w-full mb-5 text-white rounded-full p-4">Erhöhen</button>
-    <button type="button" class="bg-yellow-400 w-full mb-5 text-white rounded-full p-4">Verringern</button>
-    <button type="button" class="bg-red-500 w-full mb-5 text-white rounded-full p-4">Zurücksetzen</button>
+    <div class="flex flex-col gap-3">
+        <button type="button" class="bg-green-600 text-white rounded-2xl p-4 hover:bg-green-700 transition"
+            data-action="click->sidebar-counter#increaseCount">
+            Erhöhen
+        </button>
+        <button type="button" class="bg-yellow-400 text-white rounded-2xl p-4 hover:bg-yellow-500 transition"
+            data-action="click->sidebar-counter#decreaseCount">
+            Verringern
+        </button>
+        <button type="button" class="bg-red-500 text-white rounded-2xl p-4 hover:bg-red-600 transition"
+            data-action="click->sidebar-counter#resetCount">
+            Zurücksetzen
+        </button>
+    </div>
 </x-box>
