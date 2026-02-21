@@ -11,7 +11,22 @@ body {
 	background-image: url("/images/bg.png");
 }
 
+.ck-content {
+	min-height: 350px !important;
+}
+
+.ck-sticky-panel__content, .ck-toolbar {
+	border-radius: 1rem 1rem 0 0 !important;
+}
+.ck-editor__editable {
+	border-radius: 0 0 1rem 1rem !important;
+}
+.ck-toolbar__items {
+	padding-left: 1rem !important;
+}
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../storage/framework/views/*.php";
 @source "../**/*.blade.php";
 @source "../**/*.js";
+
+
