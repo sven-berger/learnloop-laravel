@@ -138,51 +138,52 @@ Route::post('/dummy-page', [DummyPageController::class, 'store'])
     ->name('dummy-page.store');
 ```
 
-## 5) View erstellen
+## 5) View erstellen (Laravel-Standard, ohne eigene Komponenten)
 
 Datei anlegen: `resources/views/dummy-page/index.blade.php`
 
 ```blade
-<x-public-layout>
-    <x-layout.content>
-        <h1 class="text-xl font-semibold text-gray-900">Dummy-Page</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy-Page</title>
+</head>
+<body>
+    <h1>Dummy-Page</h1>
 
-        @if (session('status'))
-            <p class="mt-3 text-sm text-green-700">{{ session('status') }}</p>
+    @if (session('status'))
+        <p>{{ session('status') }}</p>
+    @endif
+
+    <form method="POST" action="{{ route('dummy-page.store') }}">
+        @csrf
+
+        <label for="content">Inhalt</label><br>
+        <textarea id="content" name="content" rows="6" required>{{ old('content') }}</textarea><br><br>
+
+        @if ($errors->has('content'))
+            <p>{{ $errors->first('content') }}</p>
         @endif
 
-        <form method="POST" action="{{ route('dummy-page.store') }}" class="mt-4 grid gap-3">
-            @csrf
+        <button type="submit">Speichern</button>
+    </form>
 
-            <div>
-                <x-forms.input-label for="content" value="Inhalt" />
-                <textarea
-                    id="content"
-                    name="content"
-                    rows="5"
-                    class="bg-white w-full min-w-0 p-4 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400"
-                    required>{{ old('content') }}</textarea>
-                <x-forms.input-error :messages="$errors->get('content')" class="mt-2" />
-            </div>
+    <hr>
 
-            <x-buttons.primary-button type="submit">Speichern</x-buttons.primary-button>
-        </form>
-    </x-layout.content>
-
-    <x-layout.content>
-        <h2 class="text-lg font-semibold text-gray-900">Gespeicherte Einträge</h2>
-
-        <div class="mt-4 space-y-3">
-            @forelse ($entries as $entry)
-                <div class="border rounded-lg p-4 text-sm text-gray-700">
-                    {{ $entry->content }}
-                </div>
-            @empty
-                <p class="text-gray-500">Noch keine Einträge vorhanden.</p>
-            @endforelse
-        </div>
-    </x-layout.content>
-</x-public-layout>
+    <h2>Gespeicherte Einträge</h2>
+    @if ($entries->isEmpty())
+        <p>Noch keine Einträge vorhanden.</p>
+    @else
+        @foreach ($entries as $entry)
+            <article>
+                <p>{{ $entry->content }}</p>
+            </article>
+        @endforeach
+    @endif
+</body>
+</html>
 ```
 
 ## 6) Testen
