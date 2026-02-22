@@ -58,6 +58,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/management', [UserManagementController::class, 'index'])
             ->name('users.management.index');
 
+        Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])
+            ->name('users.edit');
+
+        Route::patch('/users/{user}', [UserManagementController::class, 'update'])
+            ->name('users.update');
+
         Route::get('/users/roles', [UserRoleController::class, 'index'])
             ->name('users.roles.index');
 
