@@ -56,25 +56,26 @@ class SocialAuthController extends Controller
         $providerId = $oauthUser->getId();
         abort_unless(is_string($providerId) && $providerId !== '', 422, ucfirst($provider) . ' hat keine Nutzer-ID zurückgegeben.');
 
+        // Merge-Flow: User mit Social-ID oder E-Mail suchen
         $user = User::query()
             ->where($providerColumn, $providerId)
+            ->orWhere('email', $email)
             ->first();
 
         if (!$user) {
-            $user = User::query()->where('email', $email)->first();
-        }
-
-        if (!$user) {
+            // Neuer User, falls weder Social-ID noch E-Mail existiert
             $user = User::query()->create([
                 'name' => $oauthUser->getName() ?: ($oauthUser->getNickname() ?: ucfirst($provider) . ' User'),
                 'email' => $email,
                 'password' => Hash::make(Str::random(64)),
                 'email_verified_at' => now(),
+                $providerColumn => $providerId,
             ]);
-        }
-
-        if (($user->{$providerColumn} ?? null) === null || ($user->{$providerColumn} ?? '') === '') {
-            $user->forceFill([$providerColumn => $providerId])->save();
+        } else {
+            // Social-ID ggf. ergänzen
+            if (($user->{$providerColumn} ?? null) === null || ($user->{$providerColumn} ?? '') === '') {
+                $user->forceFill([$providerColumn => $providerId])->save();
+            }
         }
 
         Auth::login($user);
