@@ -268,7 +268,7 @@ Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
 - Speicherung in eigener Tabelle
 - Ausgabe aus der Datenbank
 
-Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich-Text, etc.).
+Später kannst du darauf aufbauen (Benutzerrechte, Pagination, Rich-Text, etc.).
 
 ## Cache / Optimierung: Wann was ausführen?
 
