@@ -5,8 +5,9 @@
 
     <nav class="flex flex-wrap items-center gap-4 text-white text-base sm:text-lg">
         @auth
-            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
-            <a href="{{ route('profile.edit') }}" class="hover:underline">Profil</a>
+            <a href="{{ route('profile.edit') }}" class="hover:underline">Angemeldet als: {{ Auth::user()->name }}</a> |
+
+            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> |
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

@@ -1,5 +1,3 @@
-@section('title', content: 'Anmelden')
-
 <x-guest-layout>
     <!-- Session Status -->
     <x-forms.auth-session-status class="mb-4" :status="session('status')" />
@@ -7,7 +5,7 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
+        <!-- Email Addresse -->
         <div>
             <x-forms.input-label for="email" :value="__('E-Mail Adresse')" />
             <x-forms.text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
@@ -15,7 +13,7 @@
             <x-forms.input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+        <!-- Passwort -->
         <div class="mt-4">
             <x-forms.input-label for="password" :value="__('Dein Passwort')" />
 
@@ -25,12 +23,12 @@
             <x-forms.input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
+        <!-- Angemeldet bleiben -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox"
                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ms-2 text-sm text-gray-600">{{ __('Angemeldet bleiben') }}</span>
             </label>
         </div>
 

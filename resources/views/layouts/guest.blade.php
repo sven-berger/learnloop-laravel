@@ -16,7 +16,7 @@
 
 @section('content')
     <x-layout.content>
-        <div class="w-full max-w-md mx-auto">
+        <div class="w-full">
             {{ $slot }}
         </div>
     </x-layout.content>

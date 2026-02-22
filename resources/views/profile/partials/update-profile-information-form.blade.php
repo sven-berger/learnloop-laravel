@@ -21,7 +21,7 @@
         </div>
 
         <div>
-            <x-forms.input-label for="email" :value="__('Email')" />
+            <x-forms.input-label for="email" :value="__('E-Mail Adresse')" />
             <x-forms.text-input id="email" name="email" type="email" class="mt-1" :value="old('email', $user->email)"
                 required autocomplete="username" />
             <x-forms.input-error class="mt-2" :messages="$errors->get('email')" />
@@ -29,17 +29,17 @@
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('Ihre E-Mail-Adresse ist nicht verifiziert.') }}
 
                         <button form="send-verification"
                             class="underline text-sm text-gray-600 hover:text-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500/40">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('Klicken Sie hier, um die Verifizierungs-E-Mail erneut zu senden.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('Ein neuer Verifizierungslink wurde an Ihre E-Mail-Adresse gesendet.') }}
                         </p>
                     @endif
                 </div>
@@ -47,11 +47,11 @@
         </div>
 
         <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-            <x-buttons.primary-button class="sm:w-auto">{{ __('Save') }}</x-buttons.primary-button>
+            <x-buttons.primary-button class="sm:w-auto">{{ __('Speichern') }}</x-buttons.primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                    class="text-sm text-gray-600">{{ __('Gespeichert.') }}</p>
             @endif
         </div>
     </form>
