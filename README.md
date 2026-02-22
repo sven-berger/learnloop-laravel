@@ -17,63 +17,192 @@
 6. Ergebnis pruefen: `https://laravel.riftcore.de/`
 7. Optional: Deploy-Log ansehen: `ssh sven@116.202.66.41 'tail -n 50 /var/www/laravel.riftcore.de/storage/logs/deploy.log'`
 
-## Layout Guide (Blade)
+## Mini-Tutorial: Dummy-Seite mit eigener DB-Tabelle
 
-- `x-public-layout`: Oeffentliche Inhaltsseiten (z. B. Startseite, Impressum, Datenschutz, Nutzungsbedingungen, Guestbook, Testseiten).
-- `x-guest-layout`: Auth-Gastseiten fuer nicht eingeloggte Nutzer (Login, Register, Passwort-Reset, Verifizierung).
-- `x-app-layout`: Allgemeine Seiten fuer eingeloggte Nutzer (z. B. Dashboard, Profil).
-- `x-admin-layout`: Admin-Bereich (Routen mit `admin.*`, z. B. Benutzerverwaltung, Rollenverwaltung, Content-Create).
-- `x-moderator-layout`: Moderationsbereich (z. B. `moderation.*`).
+Ziel: Eine einfache Seite unter `/dummy-page`, auf der du Text in ein Textarea eingibst, in der Datenbank speicherst und wieder ausgibst.
 
-Hinweis: Seitentitel werden zentral im jeweiligen Layout ueber `request()->routeIs(...)` gepflegt, nicht pro Seite in jeder einzelnen View.
+Ohne Rollen/Rechte, nur das Grundprinzip:
 
-## About Laravel
+- Migration
+- Model
+- Controller
+- View
+- Route
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1) Model + Migration anlegen
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Im Projekt ausführen:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+php artisan make:model DummyPageEntry -m
+```
 
-## Learning Laravel
+Dann die neue Migration in `database/migrations/...create_dummy_page_entries_table.php` anpassen:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```php
+public function up(): void
+{
+    Schema::create('dummy_page_entries', function (Blueprint $table) {
+        $table->id();
+        $table->text('content');
+        $table->timestamps();
+    });
+}
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Migration ausführen:
 
-## Laravel Sponsors
+```bash
+php artisan migrate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 2) Controller anlegen
 
-### Premium Partners
+```bash
+php artisan make:controller DummyPageController
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+In `app/Http/Controllers/DummyPageController.php`:
 
-## Contributing
+```php
+<?php
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+namespace App\Http\Controllers;
 
-## Code of Conduct
+use App\Models\DummyPageEntry;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+class DummyPageController extends Controller
+{
+    public function index(): View
+    {
+        $entries = DummyPageEntry::query()
+            ->latest()
+            ->get();
 
-## Security Vulnerabilities
+        return view('dummy-page.index', [
+            'entries' => $entries,
+        ]);
+    }
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'content' => ['required', 'string'],
+        ]);
 
-## License
+        DummyPageEntry::create($validated);
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        return redirect()
+            ->route('dummy-page.index')
+            ->with('status', 'Eintrag gespeichert.');
+    }
+}
+```
+
+## 3) Model ausfüllbar machen
+
+In `app/Models/DummyPageEntry.php`:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class DummyPageEntry extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'content',
+    ];
+}
+```
+
+## 4) Routes eintragen
+
+In `routes/web.php`:
+
+```php
+use App\Http\Controllers\DummyPageController;
+
+Route::get('/dummy-page', [DummyPageController::class, 'index'])
+    ->name('dummy-page.index');
+
+Route::post('/dummy-page', [DummyPageController::class, 'store'])
+    ->name('dummy-page.store');
+```
+
+## 5) View erstellen
+
+Datei anlegen: `resources/views/dummy-page/index.blade.php`
+
+```blade
+<x-public-layout>
+    <x-layout.content>
+        <h1 class="text-xl font-semibold text-gray-900">Dummy-Page</h1>
+
+        @if (session('status'))
+            <p class="mt-3 text-sm text-green-700">{{ session('status') }}</p>
+        @endif
+
+        <form method="POST" action="{{ route('dummy-page.store') }}" class="mt-4 grid gap-3">
+            @csrf
+
+            <div>
+                <x-forms.input-label for="content" value="Inhalt" />
+                <textarea
+                    id="content"
+                    name="content"
+                    rows="5"
+                    class="bg-white w-full min-w-0 p-4 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400"
+                    required>{{ old('content') }}</textarea>
+                <x-forms.input-error :messages="$errors->get('content')" class="mt-2" />
+            </div>
+
+            <x-buttons.primary-button type="submit">Speichern</x-buttons.primary-button>
+        </form>
+    </x-layout.content>
+
+    <x-layout.content>
+        <h2 class="text-lg font-semibold text-gray-900">Gespeicherte Einträge</h2>
+
+        <div class="mt-4 space-y-3">
+            @forelse ($entries as $entry)
+                <div class="border rounded-lg p-4 text-sm text-gray-700">
+                    {{ $entry->content }}
+                </div>
+            @empty
+                <p class="text-gray-500">Noch keine Einträge vorhanden.</p>
+            @endforelse
+        </div>
+    </x-layout.content>
+</x-public-layout>
+```
+
+## 6) Testen
+
+```bash
+php artisan serve
+```
+
+Dann aufrufen:
+
+- `http://127.0.0.1:8000/dummy-page`
+
+---
+
+## Ergebnis
+
+Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
+
+- Eingabe im Formular
+- Speicherung in eigener Tabelle
+- Ausgabe aus der Datenbank
+
+Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich-Text, etc.).
