@@ -20,7 +20,9 @@ Route::get('/welcome', function () {
 })->name('welcome');
 
 Route::get('/guestbook', [GuestbookController::class, 'guestbookAction'])->name('guestbook');
-Route::post('/guestbook/save', [GuestbookController::class, 'saveAction'])->name('guestbook.save');
+Route::post('/guestbook/save', [GuestbookController::class, 'saveAction'])
+    ->middleware(['auth', 'permission:comment'])
+    ->name('guestbook.save');
 
 Route::get('/hello', [HelloController::class, 'hello'])->name('hello');
 Route::match(['get', 'post'], '/test', [TestController::class, 'testAction'])->name('test');
@@ -38,6 +40,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/moderation', fn () => view('access.moderation'))
+        ->middleware('permission:moderate comments')
+        ->name('moderation.index');
+
+    Route::get('/content/create', fn () => view('access.create-content'))
+        ->middleware('permission:create content')
+        ->name('content.create');
+
+    Route::get('/admin', fn () => view('access.admin'))
+        ->middleware('role:admin')
+        ->name('admin.index');
 });
 
 require __DIR__ . '/auth.php';
