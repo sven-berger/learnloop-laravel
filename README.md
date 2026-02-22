@@ -138,7 +138,7 @@ Route::post('/dummy-page', [DummyPageController::class, 'store'])
     ->name('dummy-page.store');
 ```
 
-## 5) View erstellen (Laravel-Standard, ohne eigene Komponenten)
+## 5) View erstellen
 
 Datei anlegen: `resources/views/dummy-page.blade.php`
 
