@@ -3,7 +3,7 @@
 <article {{ $attributes->merge(['class' => 'h-full flex flex-col w-full bg-slate-200 border border-gray-300 rounded-2xl card']) }}>
     <img src="{{ $image ?? '/images/placeholder-image.jpg' }}" alt="{{ $title ?? 'Platzhalter' }}"
         class="rounded-t-lg mb-4 w-full object-fill h-55" />
-    <div class="pl-6 pr-6 pb-6">
+    <div class="p-4 sm:px-6 sm:pb-6">
 
         @if($title)
             <x-h2>

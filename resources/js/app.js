@@ -54,9 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const toolbarEl = editor?.ui?.view?.toolbar?.element;
         const editableEl = editor?.ui?.view?.editable?.element;
 
-        editorRoot?.classList?.add("w-full");
+        editorRoot?.classList?.add("w-full", "min-w-0");
 
         toolbarEl?.classList?.add(
+          "w-full",
+          "min-w-0",
+          "overflow-hidden",
           "bg-white",
           "border",
           "border-gray-200",
@@ -66,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         editableEl?.classList?.add(
           "bg-white",
           "w-full",
+          "min-w-0",
           "p-4",
           "border",
           "border-gray-200",

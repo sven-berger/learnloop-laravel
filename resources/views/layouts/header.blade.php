@@ -1,9 +1,9 @@
-<header class="bg-red-800 rounded-2xl flex items-center justify-between p-6">
-    <h2 class="text-3xl text-white">
+<header class="bg-red-800 rounded-2xl flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6">
+    <h2 class="text-2xl sm:text-3xl text-white">
         <a href="{{ route('index') }}">RiftCore.de</a>
     </h2>
 
-    <nav class="flex items-center gap-4 text-white text-lg">
+    <nav class="flex flex-wrap items-center gap-4 text-white text-base sm:text-lg">
         <a href="{{ Route::has('login') ? route('login') : url('/login') }}" class="hover:underline">
             Anmelden
         </a>

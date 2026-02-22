@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('guestbook.save', [], false) }}" class="grid gap-4">
+<form method="POST" action="{{ route('guestbook.save', [], false) }}" class="grid gap-4 w-full min-w-0">
     @csrf
     <input name="username" id="username" placeholder="Benutzername" value="{{ old('username') }}" @class([
         'bg-white w-full p-4 border rounded-2xl',
@@ -31,12 +31,15 @@
         <option value="bewerbung">Durch meine Bewerbungsschreiben</option>
     </select>
 
-    <div class="flex gap-4">
-        <div>
-            <button type="submit" class="bg-blue-500 text-white rounded-full p-4">Eintrag verfassen</button>
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="sm:flex-none">
+            <button type="submit"
+                class="w-full sm:w-auto bg-blue-500 text-white rounded-full px-6 py-4 text-center">Eintrag
+                verfassen</button>
         </div>
-        <div>
-            <button type="reset" class="bg-yellow-600 text-white rounded-full p-4">Zurücksetzen</button>
+        <div class="sm:flex-none">
+            <button type="reset"
+                class="w-full sm:w-auto bg-yellow-600 text-white rounded-full px-6 py-4 text-center">Zurücksetzen</button>
         </div>
     </div>
 </form>
