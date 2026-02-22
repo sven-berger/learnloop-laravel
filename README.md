@@ -246,7 +246,7 @@ Datei anlegen: `resources/views/dummy-page.blade.php`
 </html>
 ```
 
-Hinweis: Du brauchst dafuer keine extra Seite wie `dummy-page-edit`.
+Hinweis: Du brauchst IN DIESEM FALL keine extra Seite wie `dummy-page-edit`.
 
 ### 6) Testen
 
