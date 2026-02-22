@@ -8,7 +8,7 @@
             @endcan
 
             @can('create content')
-                <a href="{{ route('content.create') }}" class="block text-blue-600 hover:underline">Inhalte erstellen</a>
+                <a href="{{ route('admin.content.create') }}" class="block text-blue-600 hover:underline">Inhalte erstellen</a>
             @endcan
 
             @role('admin')

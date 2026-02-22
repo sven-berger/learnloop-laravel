@@ -3,6 +3,7 @@
 use App\Http\Controllers\GuestbookController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ImprintController;
@@ -45,13 +46,19 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:moderate comments')
         ->name('moderation.index');
 
-    Route::get('/content/create', fn () => view('access.create-content'))
-        ->middleware('permission:create content')
-        ->name('content.create');
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', fn () => view('access.admin'))->name('index');
 
-    Route::get('/admin', fn () => view('access.admin'))
-        ->middleware('role:admin')
-        ->name('admin.index');
+        Route::get('/content/create', fn () => view('access.create-content'))
+            ->middleware('permission:create content')
+            ->name('content.create');
+
+        Route::get('/users/roles', [UserRoleController::class, 'index'])
+            ->name('users.roles.index');
+
+        Route::patch('/users/{user}/role', [UserRoleController::class, 'update'])
+            ->name('users.roles.update');
+    });
 });
 
 require __DIR__ . '/auth.php';
