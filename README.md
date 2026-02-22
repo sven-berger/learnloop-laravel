@@ -19,7 +19,7 @@ Ohne Rollen/Rechte, nur das Grundprinzip:
 - View
 - Route
 
-## 1) Model + Migration anlegen
+### 1) Model + Migration anlegen
 
 Im Projekt ausführen:
 
@@ -46,7 +46,7 @@ Migration ausführen:
 php artisan migrate
 ```
 
-## 2) Controller anlegen
+### 2) Controller anlegen
 
 ```bash
 php artisan make:controller DummyPageController
@@ -92,7 +92,7 @@ class DummyPageController extends Controller
 }
 ```
 
-## 3) Model ausfüllbar machen
+### 3) Model ausfüllbar machen
 
 In `app/Models/DummyPageEntry.php`:
 
@@ -114,7 +114,7 @@ class DummyPageEntry extends Model
 }
 ```
 
-## 4) Routes eintragen
+### 4) Routes eintragen
 
 In `routes/web.php`:
 
@@ -128,7 +128,7 @@ Route::post('/dummy-page', [DummyPageController::class, 'store'])
     ->name('dummy-page.store');
 ```
 
-## 5) View erstellen
+### 5) View erstellen
 
 Datei anlegen: `resources/views/dummy-page.blade.php`
 
@@ -176,7 +176,7 @@ Datei anlegen: `resources/views/dummy-page.blade.php`
 </html>
 ```
 
-## 6) Testen
+### 6) Testen
 
 ```bash
 php artisan serve
@@ -188,7 +188,7 @@ Dann aufrufen:
 
 ---
 
-## Ergebnis
+### Ergebnis
 
 Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
 
@@ -198,7 +198,9 @@ Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
 
 Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich-Text, etc.).
 
-### Cache / Optimierung: Wann was ausführen?
+<br><br><br>
+
+## Cache / Optimierung: Wann was ausführen?
 
 - Nach Änderungen in `routes/web.php` oder `routes/*.php`:
   - `php artisan route:clear`
@@ -219,7 +221,7 @@ Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich
   - `php artisan optimize`
   - Erst nutzen, wenn alles stabil läuft.
 
-### Safe-Reihenfolge (kurz)
+## Safe-Reihenfolge (kurz)
 
 - Lokal nach größeren Änderungen:
   - `php artisan optimize:clear`
@@ -230,7 +232,7 @@ Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich
   - `php artisan migrate --force`
   - `php artisan optimize`
 
-### Sonst noch sinnvoll im Daily Workflow
+## Sonst noch sinnvoll im Daily Workflow
 
 - Nach Frontend-Änderungen (`resources/js`, `resources/css`):
   - lokal: `npm run dev`
