@@ -267,6 +267,7 @@ Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
 - Eingabe im Formular
 - Speicherung in eigener Tabelle
 - Ausgabe aus der Datenbank
+- Möglichkeit einen bestimmten Eintrag zu ändern oder zu löschen.
 
 Später kannst du darauf aufbauen (Benutzerrechte, Pagination, Rich-Text, etc.).
 
