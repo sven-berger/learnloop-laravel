@@ -8,9 +8,10 @@
         <p>
           Nachdem ich mich intensiv mit React und moderner Frontend-Architektur beschäftigt habe, wollte ich bewusst
           wieder
-          tiefer ins Backend eintauchen – dorthin, wo für mich die eigentliche Softwareentwicklung beginnt.
+          tiefer ins Backend eintauchen – dorthin, wo für <span class="font-bold">mich</span> die eigentliche
+          Softwareentwicklung beginnt.
         </p>
-        <p>
+        <p class="mt-5">
           Mit Laravel hat sich schnell etwas sehr Vertrautes angefühlt.
         </p>
         <p>
@@ -32,32 +33,32 @@
             strukturierter, eleganter und konsistenter.
           </li>
         </ul>
-        <p>
-          Die Datenbankanbindung?<br>
-          <strong>Erstaunlich einfach</strong> -&gt; Migration erstellen, Model definieren, speichern –
-          <strong>fertig</strong>.<br>
+        <h4>Die Datenbankanbindung?</h4>
+        <p class="font-bold">Erstaunlich einfach:</p>
+        <p>Migration erstellen, Model definieren, speichern –
+          <span class="font-bold">fertig</span>.
+        </p>
+        <p class="mt-5">
           Und was mich besonders begeistert hat: Die Daten lassen sich direkt wieder an die View übergeben und mit einer
           einfachen <kbd>foreach</kbd>-Schleife sauber ausgeben. Kein unnötiger Umweg, keine überkomplizierte Struktur –
           einfach logisch.
         </p>
-        <p>
+        <p class="mt-5">
           Alles hatte seinen Platz.<br>
           Controller, Routes, Views, Models.<br>
           Keine Vermischung. Keine Unsicherheit.
         </p>
-        <p>
+        <p class="mt-5">
           Es hat sich nicht nach „Workaround“ angefühlt, sondern nach Architektur.
         </p>
       </x-card>
     </div>
 
-    <div class="h-full">
+    <div class=" h-full">
       <x-card title="Blade Komponenten" image="/images/cards/myKnowledge/blade.webp">
-        <p>
-          Ich mochte an React immer die Idee wiederverwendbarer Komponenten mit Props.<br>
-          Das war einer der Hauptgründe, warum ich React so spannend fand.
-        </p>
-        <p>
+        <p>Ich mochte an React immer die Idee wiederverwendbarer Komponenten mit Props.</p>
+        <p>Das war einer der Hauptgründe, warum ich React so spannend fand.</p>
+        <p class="mt-5">
           Und dann stellte ich fest: Mit Blade ist das genauso möglich – nur serverseitig.
         </p>
         <ul>
@@ -77,11 +78,10 @@
         <p>
           Einfach. Verständlich. Wartbar.
         </p>
-        <h3>
-          Frontend bleibt – aber sinnvoll integriert
-        </h3>
+        <h3>Frontend bleibt – aber sinnvoll integriert</h3>
         <p>
-          Parallel dazu habe ich meine Kenntnisse in Stimulus wieder aufgefrischt und konnte problemlos kleine interaktive
+          Parallel dazu habe ich meine Kenntnisse in Stimulus wieder aufgefrischt und konnte problemlos kleine
+          interaktive
           Elemente wie einen Counter umsetzen. Genau so, wie ich es mag: gezielt, kontrolliert, ergänzend.
         </p>
         <ol>
@@ -139,18 +139,24 @@
           </li>
         </ul>
         <p>
-          Und vor allem: Ich habe verstanden, warum es so funktioniert.<br>
-          Das ist für mich der entscheidende Punkt.
-        </p>
-        <p>
-          React bleibt Teil meines Werkzeugkastens.<br>
-          Aber <strong>Laravel</strong> fühlt sich aktuell nach <strong>Zuhause</strong> an.
-        </p>
-        <p>
-          Hier entwickle ich weiter.<br>
-          Hier vertiefe ich Architektur.<br>
-          Hier baue ich meine Backend-Kompetenz aus.
-        </p>
+          Und vor allem: Ich habe verstanden, warum es so funktioniert.</p>
+
+        <p class="font-bold">Das ist für mich der entscheidende Punkt.</p>
+
+        <p class="mt-5">React bleibt Teil meines Werkzeugkastens.</p>
+        <p>Aber <strong>Laravel</strong> fühlt sich aktuell nach <strong>Zuhause</strong> an.</p>
+
+        <ul>
+          <li>
+            Hier baue ich meine Backend-Kompetenz weiter aus.
+          </li>
+          <li>
+            Hier vertiefe ich mein Verständnis von Softwarearchitektur.
+          </li>
+          <li>
+            Hier entwickle ich mich als Entwickler weiter.
+          </li>
+        </ul>
         <p>
           Und genau das ist der Weg, den ich bewusst gewählt habe.
         </p>
@@ -160,18 +166,33 @@
     <div class="h-full">
       <x-card title="Meine Zukunft mit React" image="/images/cards/myKnowledge/react.webp">
         <p>
-          React ist und bleibt ein wichtiger Teil meines Werkzeugkastens.<br>
-          Es ist das Framework, mit dem ich die meiste Erfahrung habe und das ich am besten kenne.
+          React bleibt ein wichtiger Teil meines Lernwegs.<br>
+          Ich würde nicht behaupten, dass ich es perfekt beherrsche – aber ich habe durch React verstanden,
+          wie moderne Frontend-Architektur wirklich funktioniert.
         </p>
-        <p>
-          Aber aktuell liegt mein Fokus auf Laravel.<br>
-          Dort sehe ich die größte Lernkurve, die spannendsten Herausforderungen und die beste Möglichkeit, meine
-          Backend-Kompetenz auszubauen.
+
+        <p class="mt-5">
+          Besonders prägend war für mich das Arbeiten mit APIs.<br>
+          Erst durch React habe ich wirklich begriffen, wie mächtig es ist, Daten sauber vom Backend zu trennen,
+          sie gezielt abzurufen und dynamisch im Frontend darzustellen.
         </p>
-        <p>
-          Das bedeutet nicht, dass ich React aufgebe.<br>
-          Im Gegenteil: Ich werde es weiterhin nutzen, um kleine Projekte umzusetzen, neue Features auszuprobieren und
-          meine Kenntnisse aktuell zu halten.
+
+        <p class="mt-5">
+          Außerdem habe ich gelernt, wie selbstverständlich Wiederverwendbarkeit sein kann.<br />
+          Komponenten zu bauen, sie mit Props zu befüllen und strukturiert wieder einzusetzen,
+          hat mein Denken über Benutzeroberflächen nachhaltig verändert.
+        </p>
+
+        <p class="mt-5">
+          Und vielleicht am wichtigsten: Ich habe den klaren Unterschied zwischen clientseitiger
+          JavaScript-Logik und serverseitiger Verarbeitung verstanden.
+          Dieses Verständnis hilft mir heute, Webanwendungen ganzheitlicher zu betrachten.
+        </p>
+
+        <p class="mt-5">
+          React wird daher nicht „in die Ecke gestellt“.
+          Ich werde weiterhin damit arbeiten, experimentieren und mein Wissen vertiefen –
+          nur bewusst und in meinem eigenen Tempo.
         </p>
       </x-card>
     </div>
