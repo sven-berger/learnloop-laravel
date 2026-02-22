@@ -9,7 +9,7 @@
 
 ## Mini-Tutorial: Dummy-Seite mit eigener DB-Tabelle
 
-Ziel: Eine einfache Seite unter `/dummy-page`, auf der du Text in ein Textarea eingibst, in der Datenbank speicherst und wieder ausgibst.
+Ziel: Eine einfache Seite unter `/dummy-page`, auf der du Text in ein Textarea eingibst, in der Datenbank speicherst, ausgibst, bearbeitest und loeschst.
 
 Ohne Rollen/Rechte, nur das Grundprinzip:
 
@@ -66,14 +66,21 @@ use Illuminate\View\View;
 
 class DummyPageController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
         $entries = DummyPageEntry::query()
             ->latest()
             ->get();
 
+        $editEntry = null;
+        $editId = (int) $request->query('edit', 0);
+        if ($editId > 0) {
+            $editEntry = DummyPageEntry::query()->find($editId);
+        }
+
         return view('dummy-page', [
             'entries' => $entries,
+            'editEntry' => $editEntry,
         ]);
     }
 
@@ -88,6 +95,28 @@ class DummyPageController extends Controller
         return redirect()
             ->route('dummy-page.index')
             ->with('status', 'Eintrag gespeichert.');
+    }
+
+    public function update(Request $request, DummyPageEntry $entry): RedirectResponse
+    {
+        $validated = $request->validate([
+            'content' => ['required', 'string'],
+        ]);
+
+        $entry->update($validated);
+
+        return redirect()
+            ->route('dummy-page.index')
+            ->with('status', 'Eintrag aktualisiert.');
+    }
+
+    public function destroy(DummyPageEntry $entry): RedirectResponse
+    {
+        $entry->delete();
+
+        return redirect()
+            ->route('dummy-page.index')
+            ->with('status', 'Eintrag geloescht.');
     }
 }
 ```
@@ -126,6 +155,12 @@ Route::get('/dummy-page', [DummyPageController::class, 'index'])
 
 Route::post('/dummy-page', [DummyPageController::class, 'store'])
     ->name('dummy-page.store');
+
+Route::patch('/dummy-page/{entry}', [DummyPageController::class, 'update'])
+    ->name('dummy-page.update');
+
+Route::delete('/dummy-page/{entry}', [DummyPageController::class, 'destroy'])
+    ->name('dummy-page.destroy');
 ```
 
 ### 5) View erstellen
@@ -166,15 +201,52 @@ Datei anlegen: `resources/views/dummy-page.blade.php`
     @if ($entries->isEmpty())
         <p>Noch keine Einträge vorhanden.</p>
     @else
-        @foreach ($entries as $entry)
-            <article>
-                <p>{{ $entry->content }}</p>
-            </article>
-        @endforeach
+        <table border="1" cellpadding="6" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Inhalt</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($entries as $entry)
+                    <tr>
+                        <td>{{ $entry->id }}</td>
+                        <td>{{ $entry->content }}</td>
+                        <td>
+                            <a href="{{ route('dummy-page.index', ['edit' => $entry->id]) }}">Bearbeiten</a>
+
+                            <form method="POST" action="{{ route('dummy-page.destroy', $entry) }}" style="display:inline; margin-left:8px;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Loeschen</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    @if ($editEntry)
+        <h2>Eintrag bearbeiten</h2>
+        <form method="POST" action="{{ route('dummy-page.update', $editEntry) }}">
+            @csrf
+            @method('PATCH')
+
+            <label for="edit_content">Inhalt</label><br>
+            <textarea id="edit_content" name="content" rows="6" required>{{ old('content', $editEntry->content) }}</textarea><br><br>
+
+            <button type="submit">Aenderung speichern</button>
+            <a href="{{ route('dummy-page.index') }}">Abbrechen</a>
+        </form>
     @endif
 </body>
 </html>
 ```
+
+Hinweis: Du brauchst dafuer keine extra Seite wie `dummy-page-edit`.
 
 ### 6) Testen
 
