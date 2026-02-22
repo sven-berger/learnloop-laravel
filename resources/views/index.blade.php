@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', content: 'Startseite (Laravel + Tailwind + Stimulus)')
+@section('title', content: 'RiftCore')
 @section('content')
 
   <x-layout.grid-layout cols="4">
