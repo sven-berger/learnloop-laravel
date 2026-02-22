@@ -7,11 +7,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p><br><br><br>
 
-### Cache / Optimierung: Wann was ausfuehren?
+### Cache / Optimierung: Wann was ausführen?
 
 - Nach Änderungen in `routes/web.php` oder `routes/*.php`:
   - `php artisan route:clear`
-  - optional danach: `php artisan route:cache` (vor allem fuer Produktion)
+  - optional danach: `php artisan route:cache` (vor allem für Produktion)
 
 - Nach Änderungen in `config/*.php` oder `.env`:
   - `php artisan config:clear`
@@ -24,13 +24,13 @@
   - `php artisan optimize:clear`
   - Das leert gesammelt Route-, Config-, View- und weitere Caches.
 
-- Fuer Performance in Produktion (nach erfolgreichem Deploy):
+- Für Performance in Produktion (nach erfolgreichem Deploy):
   - `php artisan optimize`
-  - Erst nutzen, wenn alles stabil laeuft.
+  - Erst nutzen, wenn alles stabil läuft.
 
 ### Safe-Reihenfolge (kurz)
 
-- Lokal nach groesseren Änderungen:
+- Lokal nach größeren Änderungen:
   - `php artisan optimize:clear`
   - `php artisan migrate`
   - `php artisan route:list`
@@ -41,7 +41,7 @@
 
 ### Sonst noch sinnvoll im Daily Workflow
 
-- Nach Frontend-Aenderungen (`resources/js`, `resources/css`):
+- Nach Frontend-Änderungen (`resources/js`, `resources/css`):
   - lokal: `npm run dev`
   - Build/Deploy: `npm run build`
 
