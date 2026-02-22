@@ -5,17 +5,53 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+</p><br><br><br>
 
-## Daily Workflow
+### Cache / Optimierung: Wann was ausfuehren?
 
-1. Aenderungen vornehmen
-2. `git status`
-3. `git add <files>`
-4. `git commit -m "Nachricht"`
-5. `git push origin main` (triggert Webhook-Deploy)
-6. Ergebnis pruefen: `https://laravel.riftcore.de/`
-7. Optional: Deploy-Log ansehen: `ssh sven@116.202.66.41 'tail -n 50 /var/www/laravel.riftcore.de/storage/logs/deploy.log'`
+- Nach Aenderungen in `routes/web.php` oder `routes/*.php`:
+  - `php artisan route:clear`
+  - optional danach: `php artisan route:cache` (vor allem fuer Produktion)
+
+- Nach Aenderungen in `config/*.php` oder `.env`:
+  - `php artisan config:clear`
+  - optional danach: `php artisan config:cache`
+
+- Nach Aenderungen an Blade-Dateien in `resources/views`:
+  - `php artisan view:clear`
+
+- Wenn "komische" Altstaende auftreten (lokal):
+  - `php artisan optimize:clear`
+  - Das leert gesammelt Route-, Config-, View- und weitere Caches.
+
+- Fuer Performance in Produktion (nach erfolgreichem Deploy):
+  - `php artisan optimize`
+  - Erst nutzen, wenn alles stabil laeuft.
+
+### Safe-Reihenfolge (kurz)
+
+- Lokal nach groesseren Aenderungen:
+  - `php artisan optimize:clear`
+  - `php artisan migrate`
+  - `php artisan route:list`
+
+- Produktion nach erfolgreichem Deploy:
+  - `php artisan migrate --force`
+  - `php artisan optimize`
+
+### Sonst noch sinnvoll im Daily Workflow
+
+- Nach Frontend-Aenderungen (`resources/js`, `resources/css`):
+  - lokal: `npm run dev`
+  - Build/Deploy: `npm run build`
+
+- Nach neuen Migrationen im Team:
+  - `php artisan migrate`
+  - optional Rollback-Test lokal: `php artisan migrate:rollback`
+
+- Schneller Smoke-Check nach Deploy:
+  - Startseite, Login, Admin-Seite, Formular-POST einmal manuell klicken
+  - Log bei Fehlern: `tail -n 100 storage/logs/laravel.log`
 
 ## Mini-Tutorial: Dummy-Seite mit eigener DB-Tabelle
 
