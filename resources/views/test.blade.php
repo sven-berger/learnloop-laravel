@@ -3,86 +3,59 @@
 
 @section('content')
 
-@php
-    $selectValue = (string) old('selectMulti', $selectMulti);
-@endphp
+    @php
+        $selectValue = (string) old('selectMulti', $selectMulti);
+    @endphp
 
-<div>
-    <form method="POST" class="grid gap-5">
-        @csrf
-        <div>
-            <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
-            <input
-                class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
-                id="name"
-                name="name"
-                value="{{ old('name', $name) }}"
-                placeholder="Bitte gib deinen Namen ein"
-                required
-            />
-        </div>
+    <x-layout.content>
+        <form method="POST" action="{{ route('test') }}" data-controller="form-own-input" class="grid gap-5 w-full min-w-0">
+            @csrf
+            <div>
+                <x-forms.input-label for="name" value="Name" />
+                <x-forms.text-input id="name" name="name" type="text" class="mt-1" :value="old('name', $name)"
+                    placeholder="Bitte gib deinen Namen ein" required />
+            </div>
 
-        <div>
-            <label class="block text-sm font-medium text-gray-700" for="randomNumber">Zufallige Zahl (1-10)</label>
-            <input
-                type="number"
-                id="randomNumber"
-                name="randomNumber"
-                class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
-                min="1"
-                max="10"
-                value="{{ old('randomNumber', $randomNumber) }}"
-                placeholder="z.B. 5"
-                required
-            />
-        </div>
+            <div>
+                <x-forms.input-label for="randomNumber" value="Zufällige Zahl (1-10)" />
+                <x-forms.text-input id="randomNumber" name="randomNumber" type="number" class="mt-1"
+                    :value="old('randomNumber', $randomNumber)" min="1" max="10" placeholder="z.B. 5" required />
+            </div>
 
-        <div data-controller="form-own-input">
-            <label class="block text-sm font-medium text-gray-700" for="selectMulti">Multi-Faktor</label>
-            <select
-                class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3"
-                id="selectMulti"
-                name="selectMulti"
-                data-form-own-input-target="select"
-                data-action="change->form-own-input#sync"
-                required
-            >
-                <option value="">Bitte wahlen:</option>
-                <option value="2" {{ $selectValue === '2' ? 'selected' : '' }}>2</option>
-                <option value="4" {{ $selectValue === '4' ? 'selected' : '' }}>4</option>
-                <option value="6" {{ $selectValue === '6' ? 'selected' : '' }}>6</option>
-                <option value="8" {{ $selectValue === '8' ? 'selected' : '' }}>8</option>
-                <option value="10" {{ $selectValue === '10' ? 'selected' : '' }}>10</option>
-                <option value="ownLetter" {{ $selectValue === 'ownLetter' ? 'selected' : '' }}>Eigene Zahl</option>
-            </select>
-            <p class="mt-2 text-xs text-gray-500">Wenn du "Eigene Zahl" wahlst, erscheint das Feld darunter.</p>
-            <div data-form-own-input-target="slot"></div>
-        </div>
+            <div>
+                <x-forms.input-label for="selectMulti" value="Multi-Faktor" />
+                <select id="selectMulti" name="selectMulti" data-form-own-input-target="select"
+                    data-action="change->form-own-input#sync" required
+                    class="mt-1 bg-white w-full min-w-0 p-4 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400">
+                    <option value="">Bitte wählen…</option>
+                    <option value="2" {{ $selectValue === '2' ? 'selected' : '' }}>2</option>
+                    <option value="4" {{ $selectValue === '4' ? 'selected' : '' }}>4</option>
+                    <option value="6" {{ $selectValue === '6' ? 'selected' : '' }}>6</option>
+                    <option value="8" {{ $selectValue === '8' ? 'selected' : '' }}>8</option>
+                    <option value="10" {{ $selectValue === '10' ? 'selected' : '' }}>10</option>
+                    <option value="ownLetter" {{ $selectValue === 'ownLetter' ? 'selected' : '' }}>Eigene Zahl</option>
+                </select>
+                <p class="mt-2 text-xs text-gray-500">Wenn du „Eigene Zahl“ wählst, erscheint das Feld darunter.</p>
+                <div data-form-own-input-target="slot"></div>
+            </div>
 
-        <button
-            type="submit"
-            class="bg-blue-500 text-white rounded-full p-4"
-        >
-            Absenden
-        </button>
-    </form>
-</div>
+            <x-buttons.primary-button type="submit">Absenden</x-buttons.primary-button>
+        </form>
+    </x-layout.content>
 
-@if ($finalNumber !== null)
-    <div class="bg-white w-full p-6 border border-gray-200 rounded-2xl mt-10">
-        <h3 class="lg:text-2xl text-xl relative inline-block text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-emerald-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-0.75 after:bg-linear-to-r after:from-sky-400 after:to-emerald-600 pb-2 mb-5">
-            Ergebnis
-        </h3>
+    @if ($finalNumber !== null)
+        <x-layout.content>
+            <x-layout.h2 title="Ergebnis" />
 
-        <p class="text-gray-500 mb-5">Hallo {{ $name ?: '...' }}, wie geht es dir?</p>
+            <p class="text-gray-500 mb-5">Hallo {{ $name ?: '...' }}, wie geht es dir?</p>
 
-        <div class="grid gap-2 text-gray-600">
-            <p>Deine Zahl: <span class="font-medium">{{ $randomNumber }}</span></p>
-            <p>Multi-Faktor: <span class="font-medium">{{ $selectMulti }}</span></p>
-            <p>Ergebnis: <span class="font-medium">{{ $finalNumber }}</span></p>
-        </div>
-    </div>
-@endif
+            <div class="grid gap-2 text-gray-600">
+                <p>Deine Zahl: <span class="font-medium">{{ $randomNumber }}</span></p>
+                <p>Multi-Faktor: <span class="font-medium">{{ $selectMulti }}</span></p>
+                <p>Ergebnis: <span class="font-medium">{{ $finalNumber }}</span></p>
+            </div>
+        </x-layout.content>
+    @endif
 
 
 @endsection

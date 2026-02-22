@@ -4,12 +4,22 @@
     </h2>
 
     <nav class="flex flex-wrap items-center gap-4 text-white text-base sm:text-lg">
-        <a href="{{ Route::has('login') ? route('login') : url('/login') }}" class="hover:underline">
-            Anmelden
-        </a>
+        @auth
+            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
+            <a href="{{ route('profile.edit') }}" class="hover:underline">Profil</a>
 
-        <a href="{{ Route::has('register') ? route('register') : url('/register') }}" class="hover:underline">
-            Registrieren
-        </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="hover:underline">Logout</button>
+            </form>
+        @else
+            <a href="{{ Route::has('login') ? route('login') : url('/login') }}" class="hover:underline">
+                Anmelden
+            </a>
+
+            <a href="{{ Route::has('register') ? route('register') : url('/register') }}" class="hover:underline">
+                Registrieren
+            </a>
+        @endauth
     </nav>
 </header>

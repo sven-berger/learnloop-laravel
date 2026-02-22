@@ -1,10 +1,10 @@
 @extends('layouts.base')
-@section('title', 'Startseite (Laravel + Tailwind + Stimulus)')
+@section('title', content: 'Startseite (Laravel + Tailwind + Stimulus)')
 @section('content')
 
-  <x-grid-layout cols="4">
+  <x-layout.grid-layout cols="4">
     <div class="h-full">
-      <x-card title="Warum Laravel?" image="/images/cards/myKnowledge/laravel.webp">
+      <x-layout.card title="Warum Laravel?" image="/images/cards/myKnowledge/laravel.webp">
         <p>
           Nachdem ich mich intensiv mit React und moderner Frontend-Architektur beschäftigt habe, wollte ich bewusst
           wieder
@@ -51,11 +51,11 @@
         <p class="mt-5">
           Es hat sich nicht nach „Workaround“ angefühlt, sondern nach Architektur.
         </p>
-      </x-card>
+      </x-layout.card>
     </div>
 
     <div class=" h-full">
-      <x-card title="Blade Komponenten" image="/images/cards/myKnowledge/blade.webp">
+      <x-layout.card title="Blade Komponenten" image="/images/cards/myKnowledge/blade.webp">
         <p>Ich mochte an React immer die Idee wiederverwendbarer Komponenten mit Props.</p>
         <p>Das war einer der Hauptgründe, warum ich React so spannend fand.</p>
         <p class="mt-5">
@@ -98,11 +98,11 @@
             Stimulus ergänzt dort, wo Interaktivität sinnvoll ist.
           </li>
         </ol>
-      </x-card>
+      </x-layout.card>
     </div>
 
     <div class="h-full">
-      <x-card title="Mein aktueller Stand" image="/images/cards/myKnowledge/currentStatus.webp">
+      <x-layout.card title="Mein aktueller Stand" image="/images/cards/myKnowledge/currentStatus.webp">
         <p>
           Ich habe:
         </p>
@@ -160,11 +160,11 @@
         <p>
           Und genau das ist der Weg, den ich bewusst gewählt habe.
         </p>
-      </x-card>
+      </x-layout.card>
     </div>
 
     <div class="h-full">
-      <x-card title="Meine Zukunft mit React" image="/images/cards/myKnowledge/react.webp">
+      <x-layout.card title="Meine Zukunft mit React" image="/images/cards/myKnowledge/react.webp">
         <p>
           React bleibt ein wichtiger Teil meines Lernwegs.<br>
           Ich würde nicht behaupten, dass ich es perfekt beherrsche – aber ich habe durch React verstanden,
@@ -194,24 +194,25 @@
           Ich werde weiterhin damit arbeiten, experimentieren und mein Wissen vertiefen –
           nur bewusst und in meinem eigenen Tempo.
         </p>
-      </x-card>
+      </x-layout.card>
     </div>
-  </x-grid-layout>
+  </x-layout.grid-layout>
 
 
-  <x-content>
-    <x-h2 title="Hallo Stimulus!"></x-h2>
+  <x-layout.content>
+    <x-layout.h2 title="Hallo Stimulus!"></x-layout.h2>
     <div data-controller="hello">
-      <input data-hello-target="name" data-action="input->hello#sync" type="text"
-        class="bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3" placeholder="Gib deinen Namen ein" />
+      <x-forms.input-label for="index_hello_name" value="Dein Name" />
+      <x-forms.text-input id="index_hello_name" type="text" class="mt-1" placeholder="Gib deinen Namen ein"
+        data-hello-target="name" data-action="input->hello#sync" />
 
-      <button data-action="click->hello#greet" class="bg-blue-500 text-white rounded-full p-4 mt-5">
-        Begrüßung!
-      </button>
+      <div class="mt-5">
+        <x-buttons.primary-button type="button" data-action="click->hello#greet">Begrüßung!</x-buttons.primary-button>
+      </div>
 
       <div data-hello-target="output"></div>
     </div>
-  </x-content>
+  </x-layout.content>
 
 
 @endsection

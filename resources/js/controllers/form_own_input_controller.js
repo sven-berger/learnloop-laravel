@@ -38,7 +38,7 @@ export default class extends Controller {
     this.ownInput.type = "number";
     this.ownInput.name = this.originalName ?? "selectMulti";
     this.ownInput.className =
-      "bg-white w-full p-4 border border-gray-200 rounded-2xl mt-3";
+      "mt-3 bg-white w-full min-w-0 p-4 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400";
     this.ownInput.placeholder = "Eigenen Multi-Faktor eingeben";
     this.ownInput.required = true;
 

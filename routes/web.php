@@ -1,22 +1,32 @@
 <?php
 
+use App\Http\Controllers\GuestbookController;
+use App\Http\Controllers\HelloController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', [IndexController::class, 'indexAction'])->name('index');
 
-Route::get('/', [\App\Http\Controllers\IndexController::class, 'indexAction'])->name('index');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 
-Route::get('/guestbook/', [\App\Http\Controllers\GuestbookController::class, 'guestbookAction'])->name('guestbook');
-Route::post('/guestbook/', [\App\Http\Controllers\GuestbookController::class, 'saveAction'])->name('guestbook.save');
+Route::get('/guestbook', [GuestbookController::class, 'guestbookAction'])->name('guestbook');
+Route::post('/guestbook/save', [GuestbookController::class, 'saveAction'])->name('guestbook.save');
 
-Route::match(['get', 'post'], '/test', [\App\Http\Controllers\TestController::class, 'testAction'])->name('test');
-Route::get('/hello', [\App\Http\Controllers\HelloController::class, 'hello'])->name('hello');
+Route::get('/hello', [HelloController::class, 'hello'])->name('hello');
+Route::match(['get', 'post'], '/test', [TestController::class, 'testAction'])->name('test');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';

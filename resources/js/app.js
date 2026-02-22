@@ -1,8 +1,12 @@
 import "./bootstrap";
 
+import Alpine from "alpinejs";
 import { Application } from "@hotwired/stimulus";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/de.js";
+
+window.Alpine = Alpine;
+Alpine.start();
 
 const application = Application.start();
 
@@ -24,7 +28,7 @@ for (const path in controllerModules) {
   application.register(identifier, controller);
 }
 
-// CKEditor 5 Initialisierung mit Erweiterungen
+// CKEditor 5 Initialisierung
 document.addEventListener("DOMContentLoaded", () => {
   const editors = document.querySelectorAll("[data-editor]");
   editors.forEach((el) => {
@@ -49,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
     })
       .then((editor) => {
-        // Optik an die bestehenden Form-Inputs angleichen (Tailwind Utilities)
         const editorRoot = editor?.ui?.view?.element;
         const toolbarEl = editor?.ui?.view?.toolbar?.element;
         const editableEl = editor?.ui?.view?.editable?.element;

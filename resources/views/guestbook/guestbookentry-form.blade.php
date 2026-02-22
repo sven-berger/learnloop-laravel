@@ -1,45 +1,42 @@
 <form method="POST" action="{{ route('guestbook.save', [], false) }}" class="grid gap-4 w-full min-w-0">
     @csrf
-    <input name="username" id="username" placeholder="Benutzername" value="{{ old('username') }}" @class([
-        'bg-white w-full p-4 border rounded-2xl',
-        'border-gray-200' => !$errors->has('username'),
-        'border-red-400' => $errors->has('username'),
-    ]) />
+    <div>
+        <x-forms.input-label for="username" value="Benutzername" />
+        <x-forms.text-input id="username" name="username" type="text" class="mt-1" placeholder="Benutzername"
+            :value="old('username')" required />
+        <x-forms.input-error :messages="$errors->get('username')" class="mt-2" />
+    </div>
 
-    <input name="email" id="email" placeholder="E-Mail" value="{{ old('email') }}" @class([
-        'bg-white w-full p-4 border rounded-2xl mt-3',
-        'border-gray-200' => !$errors->has('email'),
-        'border-red-400' => $errors->has('email'),
-    ]) />
+    <div>
+        <x-forms.input-label for="email" value="E-Mail" />
+        <x-forms.text-input id="email" name="email" type="email" class="mt-1" placeholder="E-Mail" :value="old('email')"
+            required />
+        <x-forms.input-error :messages="$errors->get('email')" class="mt-2" />
+    </div>
 
-    <input name="title" id="title" placeholder="Titel" value="{{ old('title') }}" @class([
-        'bg-white w-full p-4 border rounded-2xl mt-3',
-        'border-gray-200' => !$errors->has('title'),
-        'border-red-400' => $errors->has('title'),
-    ]) />
+    <div>
+        <x-forms.input-label for="title" value="Titel" />
+        <x-forms.text-input id="title" name="title" type="text" class="mt-1" placeholder="Titel" :value="old('title')"
+            required />
+        <x-forms.input-error :messages="$errors->get('title')" class="mt-2" />
+    </div>
 
-    <x-editor name="message" id="content" :value="old('message') ?? ''" />
+    <x-forms.editor name="message" id="content" :value="old('message') ?? ''" />
 
-    <select id="source" name="source" @class([
-        'bg-white w-full p-4 border rounded-2xl mt-3',
-        'border-gray-200' => !$errors->has('source'),
-        'border-red-400' => $errors->has('source'),
-    ])>
-        <option value="">Wie bist du auf mich aufmerksam geworden?</option>
-        <option value="google">Google</option>
-        <option value="woltlab">Durch WoltLab</option>
-        <option value="bewerbung">Durch meine Bewerbungsschreiben</option>
-    </select>
+    <div>
+        <x-forms.input-label for="source" value="Wie bist du auf mich aufmerksam geworden?" />
+        <select id="source" name="source"
+            class="mt-1 bg-white w-full min-w-0 p-4 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400">
+            <option value="">Bitte auswählen…</option>
+            <option value="google">Google</option>
+            <option value="woltlab">Durch WoltLab</option>
+            <option value="bewerbung">Durch meine Bewerbungsschreiben</option>
+        </select>
+        <x-forms.input-error :messages="$errors->get('source')" class="mt-2" />
+    </div>
 
     <div class="flex flex-col sm:flex-row gap-4">
-        <div class="sm:flex-none">
-            <button type="submit"
-                class="w-full sm:w-auto bg-blue-500 text-white rounded-full px-6 py-4 text-center">Eintrag
-                verfassen</button>
-        </div>
-        <div class="sm:flex-none">
-            <button type="reset"
-                class="w-full sm:w-auto bg-yellow-600 text-white rounded-full px-6 py-4 text-center">Zurücksetzen</button>
-        </div>
+        <x-buttons.primary-button type="submit" class="sm:w-auto">Eintrag verfassen</x-buttons.primary-button>
+        <x-buttons.secondary-button type="reset" class="sm:w-auto">Zurücksetzen</x-buttons.secondary-button>
     </div>
 </form>

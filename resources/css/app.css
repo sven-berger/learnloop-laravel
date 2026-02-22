@@ -150,7 +150,7 @@ body {
 .prose h1, .content h1, .card h1 { font-size: 2em ; }
 .prose h2, .content h2, .card h2 { font-size: 1.5em ; }
 .prose h3, .content h3, .card h3 { font-size: 1.3em ; }
-.prose h4, .content h4, .card h4 { font-size: 1.1em;}
+.prose h4, .content h4, .card h4 { font-size: 1.1em; }
 .prose h5, .content h5, .card h5 { font-size: 1em; }
 .prose h6, .content h6, .card h6 { font-size: 0.9em ; }
 
@@ -175,6 +175,11 @@ body {
 	text-decoration: underline;
 }
 
+.buttonSecondary a {
+	color: #fafafa !important;
+	text-decoration: none !important;
+}
+
 .prose a:hover, .content a:hover, .card a:hover {
 	color: #0051a3;
 }
@@ -187,5 +192,3 @@ body {
 @source "../../storage/framework/views/*.php";
 @source "../**/*.blade.php";
 @source "../**/*.js";
-
-

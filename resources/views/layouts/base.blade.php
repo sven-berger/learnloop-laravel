@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -24,11 +25,13 @@
 
             <section class="order-1 md:order-2 flex-1 min-w-0">
                 <div class="flex-7">
-                    <x-content class="flex justify-center">
-                        <h2
-                            class="font-extrabold text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
-                            @yield('title')</h2>
-                    </x-content>
+                    @unless (View::hasSection('hideBaseTitle'))
+                        <x-layout.content class="flex justify-center">
+                            <h2
+                                class="font-extrabold text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-600">
+                                @yield('title')</h2>
+                        </x-layout.content>
+                    @endunless
                     @yield('content')
                 </div>
             </section>
