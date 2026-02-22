@@ -6,15 +6,15 @@
 
     <div class="flex flex-col gap-3">
         <x-buttons.primary-button data-action="click->sidebar-counter#increaseCount">
-            Erhöhen
+            Counter erhöhen
         </x-buttons.primary-button>
 
         <x-buttons.secondary-button data-action="click->sidebar-counter#decreaseCount">
-            Verringern
+            Counter verringern
         </x-buttons.secondary-button>
 
         <x-buttons.danger-button data-action="click->sidebar-counter#resetCount">
-            Zurücksetzen
+            Counter zurücksetzen
         </x-buttons.danger-button>
     </div>
 </x-layout.box>
