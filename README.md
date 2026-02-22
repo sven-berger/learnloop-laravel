@@ -7,52 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p><br><br><br>
 
-### Cache / Optimierung: Wann was ausführen?
-
-- Nach Änderungen in `routes/web.php` oder `routes/*.php`:
-  - `php artisan route:clear`
-  - optional danach: `php artisan route:cache` (vor allem für Produktion)
-
-- Nach Änderungen in `config/*.php` oder `.env`:
-  - `php artisan config:clear`
-  - optional danach: `php artisan config:cache`
-
-- Nach Änderungen an Blade-Dateien in `resources/views`:
-  - `php artisan view:clear`
-
-- Wenn "komische" Altstände auftreten (lokal):
-  - `php artisan optimize:clear`
-  - Das leert gesammelt Route-, Config-, View- und weitere Caches.
-
-- Für Performance in Produktion (nach erfolgreichem Deploy):
-  - `php artisan optimize`
-  - Erst nutzen, wenn alles stabil läuft.
-
-### Safe-Reihenfolge (kurz)
-
-- Lokal nach größeren Änderungen:
-  - `php artisan optimize:clear`
-  - `php artisan migrate`
-  - `php artisan route:list`
-
-- Produktion nach erfolgreichem Deploy:
-  - `php artisan migrate --force`
-  - `php artisan optimize`
-
-### Sonst noch sinnvoll im Daily Workflow
-
-- Nach Frontend-Änderungen (`resources/js`, `resources/css`):
-  - lokal: `npm run dev`
-  - Build/Deploy: `npm run build`
-
-- Nach neuen Migrationen im Team:
-  - `php artisan migrate`
-  - optional Rollback-Test lokal: `php artisan migrate:rollback`
-
-- Schneller Smoke-Check nach Deploy:
-  - Startseite, Login, Admin-Seite, Formular-POST einmal manuell klicken
-  - Log bei Fehlern: `tail -n 100 storage/logs/laravel.log`
-
 ## Mini-Tutorial: Dummy-Seite mit eigener DB-Tabelle
 
 Ziel: Eine einfache Seite unter `/dummy-page`, auf der du Text in ein Textarea eingibst, in der Datenbank speicherst und wieder ausgibst.
@@ -243,3 +197,49 @@ Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
 - Ausgabe aus der Datenbank
 
 Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich-Text, etc.).
+
+### Cache / Optimierung: Wann was ausführen?
+
+- Nach Änderungen in `routes/web.php` oder `routes/*.php`:
+  - `php artisan route:clear`
+  - optional danach: `php artisan route:cache` (vor allem für Produktion)
+
+- Nach Änderungen in `config/*.php` oder `.env`:
+  - `php artisan config:clear`
+  - optional danach: `php artisan config:cache`
+
+- Nach Änderungen an Blade-Dateien in `resources/views`:
+  - `php artisan view:clear`
+
+- Wenn "komische" Altstände auftreten (lokal):
+  - `php artisan optimize:clear`
+  - Das leert gesammelt Route-, Config-, View- und weitere Caches.
+
+- Für Performance in Produktion (nach erfolgreichem Deploy):
+  - `php artisan optimize`
+  - Erst nutzen, wenn alles stabil läuft.
+
+### Safe-Reihenfolge (kurz)
+
+- Lokal nach größeren Änderungen:
+  - `php artisan optimize:clear`
+  - `php artisan migrate`
+  - `php artisan route:list`
+
+- Produktion nach erfolgreichem Deploy:
+  - `php artisan migrate --force`
+  - `php artisan optimize`
+
+### Sonst noch sinnvoll im Daily Workflow
+
+- Nach Frontend-Änderungen (`resources/js`, `resources/css`):
+  - lokal: `npm run dev`
+  - Build/Deploy: `npm run build`
+
+- Nach neuen Migrationen im Team:
+  - `php artisan migrate`
+  - optional Rollback-Test lokal: `php artisan migrate:rollback`
+
+- Schneller Smoke-Check nach Deploy:
+  - Startseite, Login, Admin-Seite, Formular-POST einmal manuell klicken
+  - Log bei Fehlern: `tail -n 100 storage/logs/laravel.log`
