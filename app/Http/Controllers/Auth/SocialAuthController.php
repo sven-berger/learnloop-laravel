@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -48,19 +49,58 @@ class SocialAuthController extends Controller
         $providerColumn = $this->providerColumn($provider);
         abort_unless($providerColumn !== '', 404);
 
-        $oauthUser = Socialite::driver($provider)->user();
+        $driver = Socialite::driver($provider);
+        if ($provider === 'github' && $driver instanceof AbstractProvider) {
+            $driver->scopes(['user:email']);
+        }
 
-        $email = $oauthUser->getEmail();
-        abort_unless(is_string($email) && $email !== '', 422, ucfirst($provider) . ' hat keine E-Mail-Adresse zurückgegeben.');
+        $oauthUser = $driver->user();
 
         $providerId = $oauthUser->getId();
+
+        if (!is_string($providerId) || $providerId === '') {
+            $raw = method_exists($oauthUser, 'getRaw') ? $oauthUser->getRaw() : [];
+
+            $providerId = match (true) {
+                isset($raw['id']) && $raw['id'] !== '' => (string) $raw['id'],
+                isset($raw['node_id']) && $raw['node_id'] !== '' => 'node:' . (string) $raw['node_id'],
+                isset($raw['login']) && $raw['login'] !== '' => 'login:' . (string) $raw['login'],
+                default => '',
+            };
+
+            if ($providerId !== '') {
+                Log::notice('OAuth-ID über Raw-Fallback ermittelt.', [
+                    'provider' => $provider,
+                    'provider_id' => $providerId,
+                ]);
+            }
+        }
+
         abort_unless(is_string($providerId) && $providerId !== '', 422, ucfirst($provider) . ' hat keine Nutzer-ID zurückgegeben.');
 
-        // Merge-Flow: User mit Social-ID oder E-Mail suchen
+        $email = $oauthUser->getEmail();
+        $email = is_string($email) && $email !== '' ? $email : null;
+
+        // Merge-Flow: zuerst sicher per Social-ID matchen
         $user = User::query()
             ->where($providerColumn, $providerId)
-            ->orWhere('email', $email)
             ->first();
+
+        if (!$user && $email !== null) {
+            $user = User::query()->where('email', $email)->first();
+        }
+
+        if ($email === null && $provider === 'github') {
+            $email = $providerId . '@users.noreply.github.local';
+
+            Log::notice('GitHub OAuth ohne E-Mail-Adresse, verwende Fallback-Mail.', [
+                'provider' => $provider,
+                'provider_id' => $providerId,
+                'fallback_email' => $email,
+            ]);
+        }
+
+        abort_unless($email !== null, 422, ucfirst($provider) . ' hat keine E-Mail-Adresse zurückgegeben.');
 
         if (!$user) {
             // Neuer User, falls weder Social-ID noch E-Mail existiert
