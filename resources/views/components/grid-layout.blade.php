@@ -1,7 +1,6 @@
 @props([
   'cols' => 2,
 ])
-
 @php
   $colsInt = (int) $cols;
   $colsInt = max(1, min(6, $colsInt));
@@ -18,7 +17,7 @@
   $colsClass = $colsMap[$colsInt] ?? $colsMap[2];
 @endphp
 
-<div {{ $attributes->merge(['class' => "grid grid-cols-1 gap-2.5 {$colsClass}"]) }}>
+<div {{ $attributes->merge(['class' => "grid grid-cols-1 gap-2.5 items-stretch auto-rows-fr {$colsClass}"]) }}>
   {{ $slot }}
 </div>
 

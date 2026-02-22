@@ -15,14 +15,124 @@ body {
 	min-height: 350px !important;
 }
 
+/* CKEditor Content Styling */
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6 {
+	font-weight: bold;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	line-height: 1.2;
+}
+
+.ck-content h1 { font-size: 2em; }
+.ck-content h2 { font-size: 1.5em; }
+.ck-content h3 { font-size: 1.3em; }
+.ck-content h4 { font-size: 1.1em; }
+.ck-content h5 { font-size: 1em; }
+.ck-content h6 { font-size: 0.9em; }
+
+.ck-content ul,
+.ck-content ol {
+	margin: 0.5em 0;
+	padding-left: 2em;
+	list-style: disc;
+}
+
+.ck-content li {
+	margin-bottom: 0.2em;
+}
+
+.ck-content blockquote {
+	border-left: 4px solid #999;
+	padding-left: 1em;
+	margin: 0.5em 0;
+	color: #666;
+	font-style: italic;
+}
+
+.ck-content a {
+	color: #0066cc;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.ck-content a:hover {
+	color: #0051a3;
+}
+
+.ck-content strong {
+	font-weight: bold;
+}
+
+.ck-content em {
+	font-style: italic;
+}
+
+.ck-content p {
+	margin: 0.5em 0;
+}
+
 .ck-sticky-panel__content, .ck-toolbar {
-	border-radius: 1rem 1rem 0 0 !important;
+	border-radius: 1rem 1rem 0 0;
 }
 .ck-editor__editable {
-	border-radius: 0 0 1rem 1rem !important;
+	border-radius: 0 0 1rem 1rem;
 }
 .ck-toolbar__items {
-	padding-left: 1rem !important;
+	padding-left: 1rem;
+}
+
+/* Frontend Content Styling (für {!! $content !!} Ausgaben) */
+.prose h1, .content h1, .card h1,
+.prose h2, .content h2, .card h2,
+.prose h3, .content h3, .card h3,
+.prose h4, .content h4, .card h4,
+.prose h5, .content h5, .card h5,
+.prose h6, .content h6, .card h6 {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	line-height: 1.2;
+	font-weight: bold;
+}
+
+.prose h1, .content h1, .card h1 { font-size: 2em ; }
+.prose h2, .content h2, .card h2 { font-size: 1.5em ; }
+.prose h3, .content h3, .card h3 { font-size: 1.3em ; }
+.prose h4, .content h4, .card h4 { font-size: 1.1em;}
+.prose h5, .content h5, .card h5 { font-size: 1em; }
+.prose h6, .content h6, .card h6 { font-size: 0.9em ; }
+
+.prose ul, .prose ol, .content ul, .content ol, .card ul, .card ol {
+	margin: 1.2em 0;
+	padding-left: 1.5em;
+	list-style: disc;
+}
+
+.prose li, .content li, .card li {
+	margin-bottom: 0.2em;
+}
+
+.prose blockquote, .content blockquote, .card blockquote {
+	border-left-width: 4px;
+	padding-left: 1em;
+	color: #666;
+}
+
+.prose a, .content a, .card a {
+	color: #0066cc;
+	text-decoration: underline;
+}
+
+.prose a:hover, .content a:hover, .card a:hover {
+	color: #0051a3;
+}
+
+.prose strong, .content strong, .card strong {
+	font-weight: bold;
 }
 
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
