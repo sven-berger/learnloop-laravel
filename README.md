@@ -198,8 +198,6 @@ Damit hast du die komplette Basis, um Inhalte über die Datenbank zu pflegen:
 
 Später kannst du darauf aufbauen (Bearbeiten/Löschen, Rechte, Pagination, Rich-Text, etc.).
 
-<br><br><br>
-
 ## Cache / Optimierung: Wann was ausführen?
 
 - Nach Änderungen in `routes/web.php` oder `routes/*.php`:
