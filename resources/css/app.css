@@ -187,6 +187,46 @@ body {
 	font-weight: bold;
 }
 
+.privacy-policy {
+  .label {
+    background-color: darkorange;
+    border-radius: 8px;
+    border: 2px solid darkgoldenrod;
+    padding: 5px;
+    color: white;
+    font-size: 13px;
+  }
+
+
+  ul {
+	list-style: none !important;
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+  }
+
+  .success {
+    background-color: green;
+    border: 2px solid darkgreen;
+  }
+
+  .planning {
+	background-color: red;
+	border: 2px solid firebrick;
+  }
+
+  ul {
+    margin-top: 30px;
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+
+  a {
+	color: #0066cc;
+	text-decoration: none;
+  }
+}
+
+
 @source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
 @source "../../storage/framework/views/*.php";
 @source "../**/*.blade.php";
