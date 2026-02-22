@@ -1,7 +1,7 @@
-<x-layout.box>
-    <x-layout.h2 title="Navigation"></x-layout.h2>
+<!-- <x-layout.box>
+    <x-layout.h2 title="Übungen"></x-layout.h2>
     <x-layout.ul :items="[
-        ['label' => 'Testseite', 'href' => route(name: 'test')],
-        ['label' => 'Hallo Stimulus', 'href' => route('hello')],
+        ['label' => 'Testseite', ],
+
     ]" />
-</x-layout.box>
+</x-layout.box> -->
