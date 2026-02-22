@@ -4,7 +4,7 @@
 
   <x-grid-layout cols="4">
     <div class="h-full">
-      <x-card title="Warum Laravel?" image="/images/cardImage-1.jpg">
+      <x-card title="Warum Laravel?" image="/images/cards/myKnowledge/laravel.webp">
         <p>
           Nachdem ich mich intensiv mit React und moderner Frontend-Architektur beschäftigt habe, wollte ich bewusst
           wieder
@@ -52,7 +52,7 @@
     </div>
 
     <div class="h-full">
-      <x-card title="Blade Komponenten" image="/images/cardImage-2.jpg">
+      <x-card title="Blade Komponenten" image="/images/cards/myKnowledge/blade.webp">
         <p>
           Ich mochte an React immer die Idee wiederverwendbarer Komponenten mit Props.<br>
           Das war einer der Hauptgründe, warum ich React so spannend fand.
@@ -102,7 +102,7 @@
     </div>
 
     <div class="h-full">
-      <x-card title="Mein aktueller Stand" image="/images/cardImage-3.jpg">
+      <x-card title="Mein aktueller Stand" image="/images/cards/myKnowledge/currentStatus.webp">
         <p>
           Ich habe:
         </p>
@@ -158,8 +158,21 @@
     </div>
 
     <div class="h-full">
-      <x-card title="Meine Zukunft mit React" image="/images/placeholder-image.jpg">
-
+      <x-card title="Meine Zukunft mit React" image="/images/cards/myKnowledge/react.webp">
+        <p>
+          React ist und bleibt ein wichtiger Teil meines Werkzeugkastens.<br>
+          Es ist das Framework, mit dem ich die meiste Erfahrung habe und das ich am besten kenne.
+        </p>
+        <p>
+          Aber aktuell liegt mein Fokus auf Laravel.<br>
+          Dort sehe ich die größte Lernkurve, die spannendsten Herausforderungen und die beste Möglichkeit, meine
+          Backend-Kompetenz auszubauen.
+        </p>
+        <p>
+          Das bedeutet nicht, dass ich React aufgebe.<br>
+          Im Gegenteil: Ich werde es weiterhin nutzen, um kleine Projekte umzusetzen, neue Features auszuprobieren und
+          meine Kenntnisse aktuell zu halten.
+        </p>
       </x-card>
     </div>
   </x-grid-layout>
