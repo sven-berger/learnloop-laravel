@@ -9,18 +9,18 @@
 
 ### Cache / Optimierung: Wann was ausfuehren?
 
-- Nach Aenderungen in `routes/web.php` oder `routes/*.php`:
+- Nach Änderungen in `routes/web.php` oder `routes/*.php`:
   - `php artisan route:clear`
   - optional danach: `php artisan route:cache` (vor allem fuer Produktion)
 
-- Nach Aenderungen in `config/*.php` oder `.env`:
+- Nach Änderungen in `config/*.php` oder `.env`:
   - `php artisan config:clear`
   - optional danach: `php artisan config:cache`
 
-- Nach Aenderungen an Blade-Dateien in `resources/views`:
+- Nach Änderungen an Blade-Dateien in `resources/views`:
   - `php artisan view:clear`
 
-- Wenn "komische" Altstaende auftreten (lokal):
+- Wenn "komische" Altstände auftreten (lokal):
   - `php artisan optimize:clear`
   - Das leert gesammelt Route-, Config-, View- und weitere Caches.
 
@@ -30,7 +30,7 @@
 
 ### Safe-Reihenfolge (kurz)
 
-- Lokal nach groesseren Aenderungen:
+- Lokal nach groesseren Änderungen:
   - `php artisan optimize:clear`
   - `php artisan migrate`
   - `php artisan route:list`
