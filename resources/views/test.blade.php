@@ -1,14 +1,12 @@
-@extends('layouts.base')
-@section('title', 'Testseite')
-
-@section('content')
+<x-public-layout>
 
     @php
         $selectValue = (string) old('selectMulti', $selectMulti);
     @endphp
 
     <x-layout.content>
-        <form method="POST" action="{{ route('test') }}" data-controller="form-own-input" class="grid gap-5 w-full min-w-0">
+        <form method="POST" action="{{ route('test') }}" data-controller="form-own-input"
+            class="grid gap-5 w-full min-w-0">
             @csrf
             <div>
                 <x-forms.input-label for="name" value="Name" />
@@ -58,4 +56,4 @@
     @endif
 
 
-@endsection
+</x-public-layout>

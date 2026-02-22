@@ -1,8 +1,5 @@
-@extends('layouts.base')
-@section('title', 'Guess Numbers')
-
-@section('content')
-<p class="text-gray-600 leading-relaxed">
-	Diese Seite ist noch in Arbeit.
-</p>
-@endsection
+<x-public-layout>
+	<p class="text-gray-600 leading-relaxed">
+		Diese Seite ist noch in Arbeit.
+	</p>
+</x-public-layout>

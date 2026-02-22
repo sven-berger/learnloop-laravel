@@ -1,7 +1,4 @@
-@extends('layouts.base')
-@section('title', 'Gästebuch')
-
-@section('content')
+<x-public-layout>
     <x-layout.content>
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-4 relative mb-4 rounded-2xl" role="alert">
@@ -13,7 +10,8 @@
         @endif
 
         @if (session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-4 relative mb-4 rounded-2xl" role="alert">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-4 relative mb-4 rounded-2xl"
+                role="alert">
                 <x-forms.auth-session-status class="text-green-700 font-bold" :status="session('success')" />
             </div>
         @endif
@@ -36,4 +34,4 @@
             </div>
         @endif
     </x-layout.content>
-@endsection
+</x-public-layout>

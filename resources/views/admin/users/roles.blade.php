@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-layout.content>
         <h1 class="text-xl font-semibold text-gray-900">Benutzerrollen verwalten</h1>
 
@@ -24,7 +24,9 @@
                             @endforeach
                         </select>
 
-                        <button type="submit" class="rounded bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed" @disabled($user->id === 1)>
+                        <button type="submit"
+                            class="rounded bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                            @disabled($user->id === 1)>
                             Rolle speichern
                         </button>
 
@@ -36,4 +38,4 @@
             @endforeach
         </div>
     </x-layout.content>
-</x-app-layout>
+</x-admin-layout>

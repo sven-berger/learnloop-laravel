@@ -17,6 +17,16 @@
 6. Ergebnis pruefen: `https://laravel.riftcore.de/`
 7. Optional: Deploy-Log ansehen: `ssh sven@116.202.66.41 'tail -n 50 /var/www/laravel.riftcore.de/storage/logs/deploy.log'`
 
+## Layout Guide (Blade)
+
+- `x-public-layout`: Oeffentliche Inhaltsseiten (z. B. Startseite, Impressum, Datenschutz, Nutzungsbedingungen, Guestbook, Testseiten).
+- `x-guest-layout`: Auth-Gastseiten fuer nicht eingeloggte Nutzer (Login, Register, Passwort-Reset, Verifizierung).
+- `x-app-layout`: Allgemeine Seiten fuer eingeloggte Nutzer (z. B. Dashboard, Profil).
+- `x-admin-layout`: Admin-Bereich (Routen mit `admin.*`, z. B. Benutzerverwaltung, Rollenverwaltung, Content-Create).
+- `x-moderator-layout`: Moderationsbereich (z. B. `moderation.*`).
+
+Hinweis: Seitentitel werden zentral im jeweiligen Layout ueber `request()->routeIs(...)` gepflegt, nicht pro Seite in jeder einzelnen View.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

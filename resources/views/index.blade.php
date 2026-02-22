@@ -1,6 +1,4 @@
-@extends('layouts.base')
-@section('title', content: 'RiftCore')
-@section('content')
+<x-public-layout>
 
   <x-layout.grid-layout cols="4">
     <div class="h-full">
@@ -215,4 +213,4 @@
   </x-layout.content>
 
 
-@endsection
+</x-public-layout>

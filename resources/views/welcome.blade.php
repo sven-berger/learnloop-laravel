@@ -1,8 +1,4 @@
-@extends('layouts.base')
-
-@section('title', 'Welcome')
-
-@section('content')
+<x-public-layout>
     <x-layout.content title="Dashboard">
         <p class="text-gray-700">
             Willkommen! Diese Seite wird von Laravel Breeze während der Installation angepasst.
@@ -30,4 +26,4 @@
             </div>
         @endif
     </x-layout.content>
-@endsection
+</x-public-layout>

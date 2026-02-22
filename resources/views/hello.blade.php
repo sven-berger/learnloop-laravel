@@ -1,7 +1,4 @@
-@extends('layouts.base')
-@section('title', 'Hello Stimulus!')
-
-@section('content')
+<x-public-layout>
   <x-layout.content>
     <div data-controller="hello">
       <x-forms.input-label for="hello_name" value="Dein Name" />
@@ -16,4 +13,4 @@
     </div>
   </x-layout.content>
 
-@endsection
+</x-public-layout>

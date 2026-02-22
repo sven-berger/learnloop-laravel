@@ -9,9 +9,10 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\ImprintController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\TermsOfUseController;
-
+use App\Http\Controllers\Admin\UserManagementController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\View\View;
 
 
 Route::get('/', [IndexController::class, 'indexAction'])->name('index');
@@ -42,16 +43,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/moderation', fn () => view('access.moderation'))
+    Route::get('/moderation', fn() => view('access.moderation'))
         ->middleware('permission:moderate comments')
         ->name('moderation.index');
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/', fn () => view('access.admin'))->name('index');
+        Route::get('/', fn(): View => view('access.admin'))->name('index');
 
-        Route::get('/content/create', fn () => view('access.create-content'))
+        Route::get('/content-page', fn(): View => view('content-page.admin'))->name('contentPage.index');
+        Route::get('/content/create', fn(): View => view('access.create-content'))
             ->middleware('permission:create content')
             ->name('content.create');
+
+        Route::get('/users/management', [UserManagementController::class, 'index'])
+            ->name('users.management.index');
 
         Route::get('/users/roles', [UserRoleController::class, 'index'])
             ->name('users.roles.index');
