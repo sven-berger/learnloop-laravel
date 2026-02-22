@@ -127,7 +127,6 @@ body {
 }
 
 .prose table,
-.content table,
 .card table {
 	display: block;
 	max-width: 100%;
