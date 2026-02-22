@@ -2,7 +2,7 @@
 
   <x-layout.grid-layout cols="4">
     <div class="h-full">
-      <x-layout.card title="Warum ich mich für Laravel entschieden habe" image="/images/cards/myKnowledge/laravel.webp">
+      <x-layout.card title="Warum Laravel?" image="/images/cards/myKnowledge/laravel.webp">
         <p>
           Nachdem ich mich intensiv mit React und moderner Frontend-Architektur beschäftigt habe, wollte ich bewusst
           wieder
