@@ -45,5 +45,25 @@
             @endif
         </div>
 
+        <div class="mt-4">
+            <x-buttons.secondary-button type="button" variant="white"
+                onclick="window.location='{{ route('social.redirect', ['provider' => 'google']) }}'">
+                <span class="inline-flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-google" aria-hidden="true"></i>
+                    <span>{{ __('Mit Google anmelden') }}</span>
+                </span>
+            </x-buttons.secondary-button>
+        </div>
+
+        <div class="mt-2">
+            <x-buttons.secondary-button type="button" variant="black"
+                onclick="window.location='{{ route('social.redirect', ['provider' => 'github']) }}'">
+                <span class="inline-flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    <span>{{ __('Mit GitHub anmelden') }}</span>
+                </span>
+            </x-buttons.secondary-button>
+        </div>
+
     </form>
 </x-guest-layout>

@@ -5,7 +5,13 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\ImprintController;
+use App\Http\Controllers\PrivacyPolicyController;
+use App\Http\Controllers\TermsOfUseController;
+
+
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', [IndexController::class, 'indexAction'])->name('index');
 
@@ -18,6 +24,11 @@ Route::post('/guestbook/save', [GuestbookController::class, 'saveAction'])->name
 
 Route::get('/hello', [HelloController::class, 'hello'])->name('hello');
 Route::match(['get', 'post'], '/test', [TestController::class, 'testAction'])->name('test');
+
+// Route zu Datenschtutz, Nutzungsbedingungen und Impressum-Seiten
+Route::get('/imprint', [ImprintController::class, 'imprint'])->name('imprint');
+Route::get('/privacy-policy', [PrivacyPolicyController::class, 'privacyPolicy'])->name('privacyPolicy');
+Route::get('/terms-of-use', [TermsOfUseController::class, 'termsOfUse'])->name('termsOfUse');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

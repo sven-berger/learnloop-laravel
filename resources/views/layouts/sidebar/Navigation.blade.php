@@ -11,9 +11,9 @@
 
     <div class="mt-5">
         <x-layout.ul :items="[
-        ['label' => 'Impressum', 'href' => Route::has('impressum') ? route('impressum') : url('/impressum'), 'class' => 'hover:underline'],
-        ['label' => 'Datenschutz', 'href' => Route::has('datenschutz') ? route('datenschutz') : url('/datenschutz'), 'class' => 'hover:underline'],
-        ['label' => 'Kontakt', 'href' => Route::has('kontakt') ? route('kontakt') : url('/kontakt'), 'class' => 'hover:underline'],
+        ['label' => 'Impressum', 'href' => route('imprint')],
+        ['label' => 'Datenschutzerklärung', 'href' => route('privacyPolicy')],
+        ['label' => 'Nutzungsbedingungen', 'href' => route('termsOfUse')],
     ]" />
 
     </div>
