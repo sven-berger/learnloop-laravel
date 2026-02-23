@@ -56,11 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const editorRoot = editor?.ui?.view?.element;
         const toolbarEl = editor?.ui?.view?.toolbar?.element;
         const editableEl = editor?.ui?.view?.editable?.element;
+        const fieldWrapper = el?.closest?.(".editor-field");
 
-        editorRoot?.classList?.add("w-full", "min-w-0");
+        fieldWrapper?.classList?.add(
+          "w-full",
+          "max-w-full",
+          "min-w-0",
+          "overflow-x-hidden",
+        );
+
+        editorRoot?.classList?.add("w-full", "max-w-full", "min-w-0");
 
         toolbarEl?.classList?.add(
           "w-full",
+          "max-w-full",
           "min-w-0",
           "overflow-hidden",
           "bg-white",
@@ -72,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         editableEl?.classList?.add(
           "bg-white",
           "w-full",
+          "max-w-full",
           "min-w-0",
           "p-4",
           "border",
@@ -79,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "border-t-0",
           "rounded-b-2xl",
           "outline-none",
+          "wrap-anywhere",
         );
       })
       .catch((error) => console.error("CKEditor error:", error));

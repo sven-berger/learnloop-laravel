@@ -10,6 +10,26 @@ body {
 	flex-direction: column;
 	min-height: 100vh;
 	background-image: url("/images/bg.png");
+	overflow-x: hidden;
+}
+
+a,
+p,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li {
+	overflow-wrap: anywhere;
+}
+
+@media (max-width: 639px) {
+	.grid-cols-\[auto_1fr\] {
+		grid-template-columns: 1fr;
+	}
 }
 
 .ck-content {
@@ -95,6 +115,24 @@ body {
 	min-width: 0;
 }
 
+.editor-field,
+.editor-field .ck,
+.editor-field .ck-editor,
+.editor-field .ck-editor__main,
+.editor-field .ck-sticky-panel,
+.editor-field .ck-sticky-panel__content,
+.editor-field .ck-editor__editable,
+.editor-field .ck-content {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+.editor-field {
+	overflow-x: hidden;
+}
+
 /* Allow toolbar to wrap on small screens instead of overflowing horizontally */
 .ck.ck-toolbar {
 	max-width: 100%;
@@ -110,6 +148,12 @@ body {
 	flex-wrap: wrap;
 	row-gap: 0.25rem;
 	white-space: normal;
+}
+
+.editor-field .ck-editor__editable_inline,
+.editor-field .ck-content {
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 /* Prevent long words/URLs from breaking layout inside the editor */

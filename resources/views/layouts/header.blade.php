@@ -1,13 +1,15 @@
-<header class="bg-red-800 rounded-2xl flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6">
-    <h2 class="text-2xl sm:text-3xl text-white">
+<header
+    class="bg-red-800 rounded-2xl flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6">
+    <h2 class="text-2xl sm:text-3xl text-white wrap-break-word">
         <a href="{{ route('index') }}">RiftCore.de (Laravel + Tailwind + Stimulus)</a>
     </h2>
 
-    <nav class="flex flex-wrap items-center gap-4 text-white text-base sm:text-lg">
+    <nav class="flex flex-wrap items-center gap-x-3 gap-y-2 text-white text-sm sm:text-base lg:text-lg">
         @auth
-            <a href="{{ route('profile.edit') }}" class="hover:underline">Angemeldet als: {{ Auth::user()->name }}</a> |
+            <a href="{{ route('profile.edit') }}" class="hover:underline break-all">Angemeldet als:
+                {{ Auth::user()->name }}</a>
 
-            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a> |
+            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

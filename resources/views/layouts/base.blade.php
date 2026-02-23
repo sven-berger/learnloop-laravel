@@ -10,10 +10,10 @@
 </head>
 
 <body>
-    <div class="min-h-screen flex flex-col p-4">
+    <div class="min-h-screen flex flex-col p-4 sm:p-5">
         @include('layouts.header')
-        <main class="flex flex-1 gap-8 flex-col md:flex-row">
-            <aside class="order-2 md:order-1 min-w-0 lg:w-110">
+        <main class="flex flex-1 gap-4 sm:gap-6 md:gap-8 flex-col md:flex-row">
+            <aside class="order-2 md:order-1 min-w-0 w-full xl:w-110">
                 <div class="min-h-full flex-1">
                     @include('layouts.sidebar.Navigation')
                     @include('layouts.sidebar.Templates')
