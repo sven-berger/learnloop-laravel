@@ -2,8 +2,6 @@ import "./bootstrap";
 
 import Alpine from "alpinejs";
 import { Application } from "@hotwired/stimulus";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "@ckeditor/ckeditor5-build-classic/build/translations/de.js";
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -31,67 +29,81 @@ for (const path in controllerModules) {
 // CKEditor 5 Initialisierung
 document.addEventListener("DOMContentLoaded", () => {
   const editors = document.querySelectorAll("[data-editor]");
-  editors.forEach((el) => {
-    ClassicEditor.create(el, {
-      language: {
-        ui: "de",
-        content: "de",
-      },
-      toolbar: [
-        "heading",
-        "|",
-        "bold",
-        "italic",
-        "link",
-        "|",
-        "bulletedList",
-        "numberedList",
-        "blockQuote",
-        "|",
-        "undo",
-        "redo",
-      ],
-    })
-      .then((editor) => {
-        const editorRoot = editor?.ui?.view?.element;
-        const toolbarEl = editor?.ui?.view?.toolbar?.element;
-        const editableEl = editor?.ui?.view?.editable?.element;
-        const fieldWrapper = el?.closest?.(".editor-field");
 
-        fieldWrapper?.classList?.add(
-          "w-full",
-          "max-w-full",
-          "min-w-0",
-          "overflow-x-hidden",
-        );
+  if (!editors.length) return;
 
-        editorRoot?.classList?.add("w-full", "max-w-full", "min-w-0");
+  (async () => {
+    try {
+      const [{ default: ClassicEditor }] = await Promise.all([
+        import("@ckeditor/ckeditor5-build-classic"),
+        import("@ckeditor/ckeditor5-build-classic/build/translations/de.js"),
+      ]);
 
-        toolbarEl?.classList?.add(
-          "w-full",
-          "max-w-full",
-          "min-w-0",
-          "overflow-hidden",
-          "bg-white",
-          "border",
-          "border-gray-200",
-          "rounded-t-2xl",
-        );
+      editors.forEach((el) => {
+        ClassicEditor.create(el, {
+          language: {
+            ui: "de",
+            content: "de",
+          },
+          toolbar: [
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "blockQuote",
+            "|",
+            "undo",
+            "redo",
+          ],
+        })
+          .then((editor) => {
+            const editorRoot = editor?.ui?.view?.element;
+            const toolbarEl = editor?.ui?.view?.toolbar?.element;
+            const editableEl = editor?.ui?.view?.editable?.element;
+            const fieldWrapper = el?.closest?.(".editor-field");
 
-        editableEl?.classList?.add(
-          "bg-white",
-          "w-full",
-          "max-w-full",
-          "min-w-0",
-          "p-4",
-          "border",
-          "border-gray-200",
-          "border-t-0",
-          "rounded-b-2xl",
-          "outline-none",
-          "wrap-anywhere",
-        );
-      })
-      .catch((error) => console.error("CKEditor error:", error));
-  });
+            fieldWrapper?.classList?.add(
+              "w-full",
+              "max-w-full",
+              "min-w-0",
+              "overflow-x-hidden",
+            );
+
+            editorRoot?.classList?.add("w-full", "max-w-full", "min-w-0");
+
+            toolbarEl?.classList?.add(
+              "w-full",
+              "max-w-full",
+              "min-w-0",
+              "overflow-hidden",
+              "bg-white",
+              "border",
+              "border-gray-200",
+              "rounded-t-2xl",
+            );
+
+            editableEl?.classList?.add(
+              "bg-white",
+              "w-full",
+              "max-w-full",
+              "min-w-0",
+              "p-4",
+              "border",
+              "border-gray-200",
+              "border-t-0",
+              "rounded-b-2xl",
+              "outline-none",
+              "wrap-anywhere",
+            );
+          })
+          .catch((error) => console.error("CKEditor error:", error));
+      });
+    } catch (error) {
+      console.error("CKEditor lazy-load error:", error);
+    }
+  })();
 });
