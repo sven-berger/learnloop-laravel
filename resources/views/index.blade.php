@@ -202,11 +202,11 @@
     <div data-controller="hello">
       <x-forms.input-label for="index_hello_name" value="Dein Name" />
       <x-forms.text-input id="index_hello_name" type="text" class="mt-1" placeholder="Gib deinen Namen ein"
-        data-hello-target="name" data-action="input->hello#sync" />
+        data-hello-target="name" data-action="change->hello#sync" />
 
-      <div class="mt-5">
-        <x-buttons.primary-button type="button" data-action="click->hello#greet">Begrüßung!</x-buttons.primary-button>
-      </div>
+      <!-- <div class="mt-5">
+        <x-buttons.primary-button type="button" data-action="change->hello#greet">Begrüßung!</x-buttons.primary-button>
+      </div> -->
 
       <div data-hello-target="output"></div>
     </div>
