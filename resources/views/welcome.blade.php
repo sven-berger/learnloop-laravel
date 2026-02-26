@@ -15,7 +15,6 @@
                         class="bg-white border border-gray-200 rounded-2xl px-6 py-3 text-center w-full sm:w-auto hover:bg-gray-50">
                         Anmelden
                     </a>
-
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
                             class="bg-white border border-gray-200 rounded-2xl px-6 py-3 text-center w-full sm:w-auto hover:bg-gray-50">
