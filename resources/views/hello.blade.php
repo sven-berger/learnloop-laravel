@@ -1,16 +1,22 @@
 <x-public-layout>
-  <x-layout.content>
-    <div data-controller="hello">
-      <x-forms.input-label for="hello_name" value="Dein Name" />
-      <x-forms.text-input id="hello_name" type="text" class="mt-1" placeholder="Gib deinen Namen ein"
-        data-hello-target="name" data-action="input->hello#sync" />
+  <div data-controller="hello">
+    <x-layout.content>
+      <x-forms.input-label for="formInput" value="Dein Name" />
+      <x-forms.text-input
+              id="formInput"
+              type="text"
+              class="mt-1"
+              placeholder="Gib deinen Namen ein"
+              data-hello-target="name"
+              data-action="input->hello#update"
+      />
+    </x-layout.content>
 
-      <div class="mt-5">
-        <x-buttons.primary-button type="button" data-action="click->hello#greet">Begrüßung!</x-buttons.primary-button>
-      </div>
+    <x-layout.content
+            data-hello-target="outputWrapper"
+            class="hidden">
 
       <div data-hello-target="output"></div>
-    </div>
-  </x-layout.content>
-
+    </x-layout.content>
+  </div>
 </x-public-layout>
