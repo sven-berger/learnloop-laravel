@@ -1,4 +1,5 @@
 <x-public-layout>
+  <p>Hö?</p>
   <div data-controller="hello">
     <x-layout.content>
       <x-forms.input-label for="formInput" value="Dein Name" />
