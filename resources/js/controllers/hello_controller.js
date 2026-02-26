@@ -1,41 +1,17 @@
-import { Controller } from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["name", "output"];
+  static targets = ["name", "output", "outputWrapper"]
 
-  connect() {
-    this.sync();
-  }
+  update() {
+    const value = this.nameTarget.value.trim()
 
-  sync() {
-    if (!this.hasNameTarget || !this.hasOutputTarget) return;
-
-    const name = this.nameTarget.value.trim();
-    const shouldShow = name.length > 0;
-    this.outputTarget.classList.toggle("hidden", !shouldShow);
-
-    if (!shouldShow) {
-      this.outputTarget.textContent = "";
+    if (value.length > 0) {
+      this.outputWrapperTarget.classList.remove("hidden")
+      this.outputTarget.textContent = `Hallo ${value}!`
+    } else {
+      this.outputWrapperTarget.classList.add("hidden")
+      this.outputTarget.textContent = ""
     }
-  }
-
-  greet() {
-    if (!this.hasNameTarget || !this.hasOutputTarget) return;
-
-    const name = this.nameTarget.value.trim();
-    if (!name) {
-      this.sync();
-      return;
-    }
-
-    this.outputTarget.textContent = `Hallo, ${name}, wie geht es dir?`;
-    this.outputTarget.classList.add(
-      "mt-5",
-      "bg-amber-300",
-      "p-4",
-      "border",
-      "rounded-2xl",
-    );
-    this.outputTarget.classList.remove("hidden");
   }
 }

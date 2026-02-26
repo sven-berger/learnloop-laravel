@@ -186,31 +186,7 @@
           JavaScript-Logik und serverseitiger Verarbeitung verstanden.
           Dieses Verständnis hilft mir heute, Webanwendungen ganzheitlicher zu betrachten.
         </p>
-
-        <p class="mt-5">
-          React wird daher nicht „in die Ecke gestellt“.
-          Ich werde weiterhin damit arbeiten, experimentieren und mein Wissen vertiefen –
-          nur bewusst und in meinem eigenen Tempo.
-        </p>
       </x-layout.card>
     </div>
   </x-layout.grid-layout>
-
-
-  <x-layout.content>
-    <x-layout.h2 title="Hallo Stimulus!"></x-layout.h2>
-    <div data-controller="hello">
-      <x-forms.input-label for="index_hello_name" value="Dein Name" />
-      <x-forms.text-input id="index_hello_name" type="text" class="mt-1" placeholder="Gib deinen Namen ein"
-        data-hello-target="name" data-action="change->hello#sync" />
-
-      <!-- <div class="mt-5">
-        <x-buttons.primary-button type="button" data-action="change->hello#greet">Begrüßung!</x-buttons.primary-button>
-      </div> -->
-
-      <div data-hello-target="output"></div>
-    </div>
-  </x-layout.content>
-
-
 </x-public-layout>
